@@ -16,11 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [appDelegate showAdView];
+    [appDelegate showAdView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Public Method
+- (void)adClicked:(NSString *)url {
+    iHDINFO(@"--- %@", url);
 }
 
 @end

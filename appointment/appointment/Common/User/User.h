@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSDictionary *userPreferedStartEndTimeDic;
 
 @property (nonatomic, strong) NSArray *dynamicMenuArr;
+@property (nonatomic, strong) NSDictionary *adDic;
 
 // Class Methods
 + (User *)sharedInstance;
@@ -26,6 +27,5 @@
 
 - (void)loginSuccess:(NSDictionary *)uinfo;
 - (void)restoreUser;
-- (void)doCallLoginService;
 
 @end

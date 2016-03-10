@@ -18,13 +18,19 @@
     }
 }
 
+- (void)removeMe {
+    [self removeFromSuperview];
+}
+
 - (void)showAds:(NSDictionary *)adDic {
     if ([iHValidationKit isValueEmpty:adDic]) {
         [self bringSubviewToFront:self.noAdView];
+        [self performSelector:@selector(removeMe) withObject:nil afterDelay:2.0f];
     } else {
         [self bringSubviewToFront:self.theAdView];
         self.adInfoDic = adDic;
         [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_adInfoDic[@"pic"]] placeholderImage:nil];
+        [self performSelector:@selector(removeMe) withObject:nil afterDelay:3.0f];
     }
 }
 @end

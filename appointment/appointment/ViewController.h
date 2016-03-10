@@ -10,6 +10,6 @@
 
 @interface ViewController : BBQBaseViewController
 
-
+- (void)adClicked:(NSString *)url;
 @end
 

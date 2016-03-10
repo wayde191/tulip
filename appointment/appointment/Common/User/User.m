@@ -22,6 +22,8 @@
 #define IF_ALL_FUNDS            @"IFinancialAllFunds"
 
 #define GET_MENU_SERVICE            @"GetMenuService"
+#define GET_AD_SERVICE              @"GetAdService"
+
 #define UPDATE_SESSION_SERVICE      @"UpdateSessionService"
 #define GET_ALL_FUNDS_SERVICE       @"GetAllFundsService"
 #define UPLOAD_TOKEN_SERVICE        @"UploadTokenService"
@@ -49,7 +51,6 @@ static User *singletonInstance = nil;
 
 - (void)restoreCachedData;
 - (void)initCachedData;
-- (void)setupAllFunds:(NSArray *)funds;
 
 @end
 
@@ -225,17 +226,6 @@ static User *singletonInstance = nil;
     [_cachedData setObject:[[NSDate date] stringWithFormat:@"yyyy-MM-dd"] forKey:IF_REFRESHED_DAY];
 }
 
-- (void)doCallLoginService {
-    NSDictionary *parass = [NSDictionary dictionaryWithObjectsAndKeys:
-                           @"wsun191@gmail.com", @"ihakulaID",
-                           @"wayde191", @"password",
-                           @"ihakula.ifinancial.scode", @"sCode",
-                           nil];
-    
-//    theRequest.requestMethod = iHRequestMethodPost;
-    [self doCallService:@"LOGIN_SERVICE" withParameters:parass andServiceUrl:SERVICE_LOGIN forDelegate:self];
-}
-
 - (void)syncCachedData
 {
     iHDINFO(@"sync ---- %@", _cachedData);
@@ -261,11 +251,18 @@ static User *singletonInstance = nil;
 #pragma mark - Private Methods
 - (void)setupUserData {
     [self doCallGetMenuService];
+    [self doCallGetAdService];
 }
 
 - (void)doCallGetMenuService {
     theRequest.requestMethod = iHRequestMethodGet;
     [self doCallHttpService:GET_MENU_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_MENU forDelegate:self];
+}
+
+- (void)doCallGetAdService {
+    theRequest.requestMethod = iHRequestMethodGet;
+    [self doCallHttpService:GET_AD_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_WELCOME_AD forDelegate:self];
+//    [self doCallHttpService:GET_AD_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_WELCOME_NO_AD forDelegate:self];
 }
 
 - (void)initCachedData
@@ -305,14 +302,20 @@ static User *singletonInstance = nil;
     if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
         iHDINFO(@"%@", response.userInfoDic);
         self.dynamicMenuArr = response.userInfoDic[@"data"];
+        
+    } else if ([response.serviceName isEqualToString:GET_AD_SERVICE]) {
+        self.adDic = response.userInfoDic[@"data"];
+        [_appDelegate showAds:_adDic];
     }
 }
 
 - (void)serviceCallFailed:(iHResponseSuccess *)response
 {
     [super serviceCallFailed:response];
-    if ([response.serviceName isEqualToString:@"LOGIN_SERVICE]"]) {
-        iHDINFO(@"%@", response.userInfoDic);
+    if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
+        
+    } else if ([response.serviceName isEqualToString:GET_AD_SERVICE]) {
+        [_appDelegate showAds:@{}];
     }
 }
 

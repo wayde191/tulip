@@ -13,6 +13,7 @@
 #import "APService.h"
 #import "NotificationView.h"
 #import "AdView.h"
+#import "ViewController.h"
 
 @interface AppDelegate (){
     NotificationView *_notView;
@@ -260,6 +261,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 #pragma mark - Ad View
+- (void)showAds:(NSDictionary *)ad {
+    [_adView showAds:ad];
+}
+
 - (void)showAdView {
     _adView.left = 0;
     _adView.top = 0;
@@ -271,12 +276,21 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     [self.window sendSubviewToBack:_adView];
 }
 
+- (void)adClicked:(NSString *)url {
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    ViewController *rootViewController = (ViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    
+    [rootViewController adClicked:url];
+}
+
 - (void)setupAdView {
     _adView = [AdView viewFromNib];
     _adView.width = IH_DEVICE_WIDTH;
     _adView.height = IH_DEVICE_HEIGHT;
+    
+    AppDelegate __weak *weakself = self;
     _adView.adClickedBlock = ^(NSString *url){
-        iHDINFO(@"---- %@", url);
+        [weakself adClicked:url];
     };
     iHDINFO(@"%@", _adView);
     [self.window addSubview:_adView];

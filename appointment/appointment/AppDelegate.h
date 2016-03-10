@@ -22,6 +22,7 @@
 - (void)hideMenu;
 
 - (void)showAdView;
+- (void)showAds:(NSDictionary *)ad;
 - (void)hideAdView;
 
 - (void)clearNotification;
