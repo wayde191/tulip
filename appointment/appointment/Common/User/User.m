@@ -21,6 +21,7 @@
 #define IF_OBSERVED_FUNDS       @"IFinancialObservedFunds"
 #define IF_ALL_FUNDS            @"IFinancialAllFunds"
 
+#define GET_MENU_SERVICE            @"GetMenuService"
 #define UPDATE_SESSION_SERVICE      @"UpdateSessionService"
 #define GET_ALL_FUNDS_SERVICE       @"GetAllFundsService"
 #define UPLOAD_TOKEN_SERVICE        @"UploadTokenService"
@@ -41,8 +42,6 @@ static User *singletonInstance = nil;
     NSString *_groupId;
     NSString *_userEmail;
     NSString *_userName;
-    NSDictionary *_contactDic;
-    NSArray *_allFunds;
     
     void(^ _getAllFundsWhenDone)(void) ;
 }
@@ -60,15 +59,13 @@ static User *singletonInstance = nil;
     self = [super init];
     if (self) {
         _appDelegate = [AppDelegate getSharedAppDelegate];
-        _cartFoodsNumber = 0;
-        self.goodsDic = [@{} mutableCopy];
-        _contactDic = @{};
-        
         [self initRequest];
         
         _monitor = [iHSingletonCloud getSharedInstanceByClassNameString:@"iHNetworkMonitor"];
         _monitor.hostUrl = HOST_NAME;
         [_monitor startNotifer];
+        
+        [self setupUserData];
 
     }
     return self;
@@ -81,93 +78,15 @@ static User *singletonInstance = nil;
     [request setupDefaultOptions:[NSDictionary dictionaryWithObjectsAndKeys:
                                   SERVICE_ROOT_URL, @"serviceRoot",
                                   nil]];
-    
-    [request setupCommonOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-                                 NH_CODE, @"ihakula_request",
-                                 nil]];
+    [request setupExtraHeaders:@{@"Authorization": @"1:1:abc"}];
+//    [request setupCommonOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                 NH_CODE, @"ihakula_request",
+//                                 nil]];
 }
 
 #pragma mark - Public Methods
-- (void)clearGoods {
-    [self.goodsDic removeAllObjects];
-    [self restoreGoodsNumber];
-}
-
-- (void)addFood {
-    self.cartFoodsNumber++;
-    [iHPubSub publishMsgWithSubject:NOTIFICATION_GOODS_CHANGES andDataDic:@{}];
-}
-
-- (void)reduceFood {
-    self.cartFoodsNumber--;
-    [iHPubSub publishMsgWithSubject:NOTIFICATION_GOODS_CHANGES andDataDic:@{}];
-}
-
-- (NSDictionary *)getTotalPrice {
-    CGFloat price = 0.0;
-    CGFloat realPrice = 0.0;
-    NSInteger goodsNumber = 0;
-    
-    NSArray *keys = [_goodsDic allKeys];
-    for (int i = 0; i < keys.count; i++) {
-        NSDictionary *goodsBase = _goodsDic[keys[i]];
-        NSNumber *counter = goodsBase[BBQ_GOODS_COUNTER_KEY];
-        NSDictionary *goods = goodsBase[BBQ_GOODS_KEY];
-        NSNumber *discountPrice = goods[@"member_price"];
-        NSNumber *fullPrice = goods[@"sale_price"];
-        
-        price += (discountPrice.floatValue * counter.integerValue);
-        realPrice += (fullPrice.floatValue * counter.integerValue);
-        goodsNumber += counter.integerValue;
-    }
-    
-    return @{@"counter":[NSNumber numberWithInteger:goodsNumber],
-             @"price":[NSNumber numberWithFloat:price],
-             @"realPrice":[NSNumber numberWithFloat:realPrice]};
-}
-
-- (void)addFoodsDic:(NSDictionary *)foods {
-    NSString *foodsIdStr = [foods[@"ID"] stringValue];
-    NSDictionary *foodsBaseDic = self.goodsDic[foodsIdStr];
-    if (foodsBaseDic) {
-        NSInteger counter = [foodsBaseDic[@"counter"] integerValue];
-        self.goodsDic[foodsIdStr] = @{
-                                      BBQ_GOODS_KEY:foods,
-                                      BBQ_GOODS_COUNTER_KEY: [NSNumber numberWithInteger:counter + 1]
-                                      };
-        
-    } else {
-        self.goodsDic[foodsIdStr] = @{
-                                      BBQ_GOODS_KEY:foods,
-                                      BBQ_GOODS_COUNTER_KEY: [NSNumber numberWithInteger:1]
-                                      };
-    }
-}
-
-- (void)reduceFoodsDic:(NSDictionary *)foods {
-    NSString *foodsIdStr = [foods[@"ID"] stringValue];
-    NSDictionary *foodsBaseDic = self.goodsDic[foodsIdStr];
-    if (foodsBaseDic) {
-        NSInteger counter = [foodsBaseDic[@"counter"] integerValue];
-        if (counter == 1) {
-            [self.goodsDic removeObjectForKey:foodsIdStr];
-        } else {
-            self.goodsDic[foodsIdStr] = @{
-                                      BBQ_GOODS_KEY:foods,
-                                      BBQ_GOODS_COUNTER_KEY: [NSNumber numberWithInteger:counter - 1]
-                                      };
-        }
-        
-    } else {
-        self.goodsDic[foodsIdStr] = @{
-                                      BBQ_GOODS_KEY:foods,
-                                      BBQ_GOODS_COUNTER_KEY: [NSNumber numberWithInteger:1]
-                                      };
-    }
-}
-
 - (void)doUploadToken {
-    theRequest.requestMethod = iHRequestMethodPost;
+//    theRequest.requestMethod = iHRequestMethodPost;
     NSString *token = [USER_DEFAULT objectForKey:IH_DEVICE_TOKEN];
     if (token) {
         NSDictionary *paras = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -185,21 +104,6 @@ static User *singletonInstance = nil;
     }
 }
 
-- (float)getMyTotalAssests
-{
-    float assests = 00.00;
-    
-    return assests;
-}
-
-- (BOOL)amiManager {
-    return [_groupId isEqualToString:@"99"];
-}
-
-- (void)updateUserContact:(NSDictionary *)contact {
-    _contactDic = contact;
-}
-
 - (void)loginSuccess:(NSDictionary *)uinfo
 {
     _userEmail = [uinfo objectForKey:@"email"];
@@ -213,7 +117,6 @@ static User *singletonInstance = nil;
     [_cachedData setObject:_groupId forKey:IF_GROUP_ID];
     
     [self syncCachedData];
-    [self doCallGetContactService];
     
     [APService setAlias:_userEmail
        callbackSelector:@selector(tagsAliasCallback:tags:alias:)
@@ -288,20 +191,9 @@ static User *singletonInstance = nil;
     return _userEmail;
 }
 
-- (NSDictionary *)getContact {
-    return _contactDic;
-}
-
 - (BOOL)isUserLoggedIn
 {
     return [iHValidationKit isValueEmpty:_userId] ? NO : YES;
-}
-
-- (void)refreshAllFundsOnceADay:(void (^)(void))whenDone
-{
-    _getAllFundsWhenDone = whenDone;
-    theRequest.requestMethod = iHRequestMethodPost;
-    [self doCallService:GET_ALL_FUNDS_SERVICE  withParameters:nil andServiceUrl:SERVICE_GET_ALL_FUNDS forDelegate:self];
 }
 
 - (BOOL)isUserRefreshedDataToday
@@ -332,15 +224,6 @@ static User *singletonInstance = nil;
     [_cachedData setObject:[[NSDate date] stringWithFormat:@"yyyy-MM-dd"] forKey:IF_REFRESHED_DAY];
 }
 
-- (void)doCallGetContactService {
-    NSDictionary *parass = [NSDictionary dictionaryWithObjectsAndKeys:
-                            _userId, @"user_id",
-                            nil];
-    
-    theRequest.requestMethod = iHRequestMethodPost;
-    [self doCallService:GET_USER_CONTACT_SERVICE withParameters:parass andServiceUrl:SERVICE_GET_CONTACT forDelegate:self];
-}
-
 - (void)doCallLoginService {
     NSDictionary *parass = [NSDictionary dictionaryWithObjectsAndKeys:
                            @"wsun191@gmail.com", @"ihakulaID",
@@ -348,18 +231,8 @@ static User *singletonInstance = nil;
                            @"ihakula.ifinancial.scode", @"sCode",
                            nil];
     
-    theRequest.requestMethod = iHRequestMethodPost;
+//    theRequest.requestMethod = iHRequestMethodPost;
     [self doCallService:@"LOGIN_SERVICE" withParameters:parass andServiceUrl:SERVICE_LOGIN forDelegate:self];
-}
-
-- (void)doUpdateTokenSessionOnceADay
-{
-    theRequest.requestMethod = iHRequestMethodPost;
-    NSDictionary *para = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"", @"session",
-                          @"", @"userid",
-                          nil];
-    [self doCallService:UPDATE_SESSION_SERVICE  withParameters:para andServiceUrl:SERVICE_UPDATE_SESSION forDelegate:self];
 }
 
 - (void)syncCachedData
@@ -385,6 +258,15 @@ static User *singletonInstance = nil;
 }
 
 #pragma mark - Private Methods
+- (void)setupUserData {
+    [self doCallGetMenuService];
+}
+
+- (void)doCallGetMenuService {
+    theRequest.requestMethod = iHRequestMethodGet;
+    [self doCallHttpService:GET_MENU_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_MENU forDelegate:self];
+}
+
 - (void)initCachedData
 {
     _cachedData = [[USER_DEFAULT objectForKey:IF_CACHED_DATA] mutableCopy];
@@ -399,12 +281,6 @@ static User *singletonInstance = nil;
     _groupId = [_cachedData objectForKey:IF_GROUP_ID];
     _userEmail = [_cachedData objectForKey:IF_USER_EMAIL];
     _userName = [_cachedData objectForKey:IF_USER_NAME];
-    
-    _allFunds = [NSArray array];
-    NSArray *funds = [_cachedData objectForKey:IF_ALL_FUNDS];
-    if (![iHValidationKit isValueEmpty:funds]) {
-        [self setupAllFunds:[_cachedData objectForKey:IF_ALL_FUNDS]];
-    }
 }
 
 - (void)restoreCachedData
@@ -422,23 +298,11 @@ static User *singletonInstance = nil;
     _userId = nil;
 }
 
-- (void)setupAllFunds:(NSArray *)funds
-{
-}
-
-- (NSArray *)getAllFunds
-{
-    return _allFunds;
-}
-
 - (void)serviceCallSuccess:(iHResponseSuccess *)response
 {
     [super serviceCallSuccess:response];
-    if ([response.serviceName isEqualToString:@"LOGIN_SERVICE]"]) {
+    if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
         iHDINFO(@"%@", response.userInfoDic);
-    } else if ([response.serviceName isEqualToString:GET_USER_CONTACT_SERVICE]) {
-        NSArray *contactArr = response.userInfoDic[@"contact"];
-        _contactDic = contactArr.count > 0 ? contactArr[0] : @{};
     }
 }
 
@@ -448,10 +312,6 @@ static User *singletonInstance = nil;
     if ([response.serviceName isEqualToString:@"LOGIN_SERVICE]"]) {
         iHDINFO(@"%@", response.userInfoDic);
     }
-}
-
-- (void)restoreGoodsNumber {
-    self.cartFoodsNumber = 0;
 }
 
 

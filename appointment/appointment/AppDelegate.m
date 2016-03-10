@@ -12,11 +12,6 @@
 #import "BBQ+ShareSDK.h"
 #import "APService.h"
 
-@interface AppDelegate ()<UINavigationControllerDelegate> {
-}
-
-@end
-
 @interface AppDelegate ()
 
 @end
@@ -31,7 +26,7 @@
     }
     
     [self initChineseShareSDK];
-    [self initWindows:application];
+//    [self initWindows:application];
     
     [User sharedInstance];
     
@@ -42,6 +37,7 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
+    iHDINFO(@"----- ????");
     return YES;
 }
 
