@@ -18,6 +18,9 @@
 - (void)hideTodoView;
 - (void)showMsg:(NSString *)message;
 
+- (void)showMenu;
+- (void)hideMenu;
+
 - (void)clearNotification;
 + (AppDelegate *)getSharedAppDelegate;
 

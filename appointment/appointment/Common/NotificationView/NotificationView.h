@@ -8,7 +8,6 @@
 
 #import "BBQBaseView.h"
 
-UIDeviceOrientation g_currDeviceOrientation;
 @interface NotificationView : BBQBaseView
 
 @property (weak, nonatomic) IBOutlet UILabel *errLabel;

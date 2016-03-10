@@ -11,8 +11,14 @@
 #import "IHEngine.h"
 #import "BBQ+ShareSDK.h"
 #import "APService.h"
+#import "NotificationView.h"
 
-@interface AppDelegate ()
+
+@interface AppDelegate (){
+    NotificationView *_notView;
+}
+
+- (void)setupNotificationView;
 
 @end
 
@@ -27,6 +33,7 @@
     
     [self initChineseShareSDK];
 //    [self initWindows:application];
+    [self setupNotificationView];
     
     [User sharedInstance];
     
@@ -227,7 +234,22 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
+#pragma mark - Notification View
+- (void)setupNotificationView {
+    _notView = [NotificationView viewFromNib];
+    [self.window addSubview:_notView];
+}
+
 #pragma mark - Public Methods
+- (void)showMenu {
+    [self.window bringSubviewToFront:_notView];
+    [_notView showMsg:@""];
+}
+
+- (void)hideMenu {
+    [_notView hideMsg];
+}
+
 - (void)showTodoView {
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA73D22A1C919DCC00AC5E9F /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA73D2291C919DCC00AC5E9F /* AdView.m */; };
+		BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA73D22B1C919DDF00AC5E9F /* AdView.xib */; };
 		BAF51FB61C905C6E007F9827 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB51C905C6E007F9827 /* main.m */; };
 		BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB81C905C6E007F9827 /* AppDelegate.m */; };
 		BAF51FBC1C905C6F007F9827 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FBB1C905C6F007F9827 /* ViewController.m */; };
@@ -110,6 +112,9 @@
 
 /* Begin PBXFileReference section */
 		1CBF081BDB84E1B34827745B /* libPods-appointment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appointment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA73D2281C919DCC00AC5E9F /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
+		BA73D2291C919DCC00AC5E9F /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
+		BA73D22B1C919DDF00AC5E9F /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
 		BAF51FB11C905C6E007F9827 /* appointment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appointment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF51FB51C905C6E007F9827 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BAF51FB71C905C6E007F9827 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -332,6 +337,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BA73D2271C919DA700AC5E9F /* AdView */ = {
+			isa = PBXGroup;
+			children = (
+				BA73D2281C919DCC00AC5E9F /* AdView.h */,
+				BA73D2291C919DCC00AC5E9F /* AdView.m */,
+				BA73D22B1C919DDF00AC5E9F /* AdView.xib */,
+			);
+			path = AdView;
+			sourceTree = "<group>";
+		};
 		BAF51FA81C905C6E007F9827 = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +405,7 @@
 		BAF51FEA1C90F7AF007F9827 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA73D2271C919DA700AC5E9F /* AdView */,
 				BAF5211D1C90FFB6007F9827 /* Share */,
 				BAF520D21C90FEE9007F9827 /* JPush */,
 				BAF5207A1C90FC1A007F9827 /* NotificationView */,
@@ -720,6 +736,7 @@
 				BAF520C61C90FC1A007F9827 /* loading0030.png in Resources */,
 				BAF520AA1C90FC1A007F9827 /* loading0002.png in Resources */,
 				BAF520A51C90FC1A007F9827 /* checkmark.png in Resources */,
+				BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */,
 				BAF520BA1C90FC1A007F9827 /* loading0018.png in Resources */,
 				BAF520C81C90FC1B007F9827 /* warning@2x.png in Resources */,
 				BAF520B31C90FC1A007F9827 /* loading0011.png in Resources */,
@@ -789,6 +806,7 @@
 				BAF51FFB1C90F7AF007F9827 /* BBQBaseTableViewCell.m in Sources */,
 				BAF51FB61C905C6E007F9827 /* main.m in Sources */,
 				BAF520781C90FA34007F9827 /* NetworkIssueView.m in Sources */,
+				BA73D22A1C919DCC00AC5E9F /* AdView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
