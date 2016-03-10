@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7B00D8DB7E6D2CDB3077DF77B218DE7614CB39E8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F4145632E3E10596396A224C34D6696624E723D1" : 0,
+    "7B00D8DB7E6D2CDB3077DF77B218DE7614CB39E8" : 0,
+    "9DBDEA4EAFEC9FBDBF4DFE73A727449F9BE92B9F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6F23717F-47E2-4FB2-8094-048295F8300B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F4145632E3E10596396A224C34D6696624E723D1" : "tulip\/appointment\/iHakula\/IHakulaRequest\/",
+    "7B00D8DB7E6D2CDB3077DF77B218DE7614CB39E8" : "tulip\/",
+    "9DBDEA4EAFEC9FBDBF4DFE73A727449F9BE92B9F" : "tulip\/appointment\/iHakula\/IHakulaInfrastructure\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "appointment",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "appointment\/appointment.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wayde191\/tulip.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7B00D8DB7E6D2CDB3077DF77B218DE7614CB39E8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wayde191\/IHakulaInfrastructure.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9DBDEA4EAFEC9FBDBF4DFE73A727449F9BE92B9F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wayde191\/IHakulaRequest.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F4145632E3E10596396A224C34D6696624E723D1"
+    }
+  ]
+}

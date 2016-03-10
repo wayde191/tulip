@@ -1,0 +1,117 @@
+PODS:
+  - IHakulaInfrastructure (0.2.0):
+    - IHakulaInfrastructure/Additions (= 0.2.0)
+    - IHakulaInfrastructure/Common (= 0.2.0)
+    - IHakulaInfrastructure/DB (= 0.2.0)
+    - IHakulaInfrastructure/Kits (= 0.2.0)
+    - IHakulaInfrastructure/Tools (= 0.2.0)
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Additions (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Common (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/DB (0.2.0):
+    - IHakulaInfrastructure/Additions
+    - IHakulaInfrastructure/Kits
+    - IHakulaInfrastructure/Tools/iHDebug
+    - IHakulaInfrastructure/Tools/iHNetworkMonitor
+    - IHakulaInfrastructure/Tools/iHSingletonCloud
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Kits (0.2.0):
+    - IHakulaInfrastructure/Tools/TouchJSON
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools (0.2.0):
+    - IHakulaInfrastructure/Tools/iHAlertView (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHDebug (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHEngine (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHFileManager (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHImageCompresser (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHLog (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHMemory (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHNetworkMonitor (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHPubSub (= 0.2.0)
+    - IHakulaInfrastructure/Tools/iHSingletonCloud (= 0.2.0)
+    - IHakulaInfrastructure/Tools/TouchJSON (= 0.2.0)
+    - IHakulaInfrastructure/Tools/XMLParser (= 0.2.0)
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHAlertView (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHDebug (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHEngine (0.2.0):
+    - IHakulaInfrastructure/Common
+    - IHakulaInfrastructure/DB
+    - IHakulaInfrastructure/Kits
+    - IHakulaInfrastructure/Tools/iHLog
+    - IHakulaInfrastructure/Tools/iHNetworkMonitor
+    - IHakulaInfrastructure/Tools/iHSingletonCloud
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHFileManager (0.2.0):
+    - IHakulaInfrastructure/Tools/iHDebug
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHImageCompresser (0.2.0):
+    - IHakulaInfrastructure/Additions
+    - IHakulaInfrastructure/Tools/iHDebug
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHLog (0.2.0):
+    - IHakulaInfrastructure/Common
+    - IHakulaInfrastructure/Kits
+    - IHakulaInfrastructure/Tools/iHDebug
+    - IHakulaInfrastructure/Tools/iHFileManager
+    - IHakulaInfrastructure/Tools/iHMemory
+    - IHakulaInfrastructure/Tools/iHSingletonCloud
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHMemory (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHNetworkMonitor (0.2.0):
+    - IHakulaInfrastructure/Tools/iHDebug
+    - IHakulaInfrastructure/Tools/iHLog
+    - IHakulaInfrastructure/Tools/iHPubSub
+    - IHakulaInfrastructure/Tools/iHSingletonCloud
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHPubSub (0.2.0):
+    - IHakulaInfrastructure/Tools/iHLog
+    - IHakulaInfrastructure/Tools/iHSingletonCloud
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/iHSingletonCloud (0.2.0):
+    - IHakulaInfrastructure/Tools/iHDebug
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/TouchJSON (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaInfrastructure/Tools/XMLParser (0.2.0):
+    - Reachability (~> 3.2)
+  - IHakulaRequest (0.4.0):
+    - IHakulaInfrastructure (~> 0.2.0)
+    - IHakulaRequest/ASI (= 0.4.0)
+    - IHakulaRequest/MVC (= 0.4.0)
+    - IHakulaRequest/Network (= 0.4.0)
+    - Reachability (~> 3.2)
+  - IHakulaRequest/ASI (0.4.0):
+    - IHakulaInfrastructure (~> 0.2.0)
+    - Reachability (~> 3.2)
+  - IHakulaRequest/MVC (0.4.0):
+    - IHakulaInfrastructure (~> 0.2.0)
+    - IHakulaRequest/Network
+    - Reachability (~> 3.2)
+  - IHakulaRequest/Network (0.4.0):
+    - IHakulaInfrastructure (~> 0.2.0)
+    - IHakulaRequest/ASI
+    - Reachability (~> 3.2)
+  - Reachability (3.2)
+
+DEPENDENCIES:
+  - IHakulaInfrastructure (from `./iHakula/IHakulaInfrastructure`)
+  - IHakulaRequest (from `./iHakula/IHakulaRequest`)
+
+EXTERNAL SOURCES:
+  IHakulaInfrastructure:
+    :path: "./iHakula/IHakulaInfrastructure"
+  IHakulaRequest:
+    :path: "./iHakula/IHakulaRequest"
+
+SPEC CHECKSUMS:
+  IHakulaInfrastructure: aec078c1b3bd9837afcb91a1899d459ccda8d61f
+  IHakulaRequest: 320d017984585324185f1326cc780ebca361c5ea
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+
+COCOAPODS: 0.38.2

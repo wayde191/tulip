@@ -1,0 +1,20 @@
+//
+//  appointment-Prefix.pch
+//  appointment
+//
+//  Created by Wei Wayde Sun on 3/10/16.
+//  Copyright © 2016 tulip. All rights reserved.
+//
+
+#ifndef appointment_Prefix_h
+#define appointment_Prefix_h
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "AppConfig.h"
+#import "IHakulaInfrastructure.h"
+#import "IHakulaRequest.h"
+#import "User.h"
+
+#endif /* appointment_Prefix_h */

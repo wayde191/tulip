@@ -1,0 +1,1 @@
+../../../../iHakula/IHakulaInfrastructure/IHakulaInfrastructure/IHakulaInfrastructure/Tools/iHLog/iHLogManager.h

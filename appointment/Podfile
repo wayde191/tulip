@@ -1,0 +1,18 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '6.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/wayde191/IHakulaSpecs.git'
+
+platform :ios, '7.1'
+
+# BBQ common dependencies
+def commonPods
+    pod 'IHakulaInfrastructure', :path => './iHakula/IHakulaInfrastructure'
+    pod 'IHakulaRequest', :path => './iHakula/IHakulaRequest'
+end
+
+target 'appointment' do
+    commonPods
+end
+

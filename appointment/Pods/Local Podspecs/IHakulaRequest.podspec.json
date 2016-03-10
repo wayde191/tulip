@@ -1,0 +1,64 @@
+{
+  "name": "IHakulaRequest",
+  "platforms": {
+    "ios": "7.1"
+  },
+  "version": "0.4.0",
+  "authors": {
+    "Wayde Sun": "wsun191@gmail.com"
+  },
+  "homepage": "https://github.com/wayde191/IHakulaInfrastructure",
+  "summary": "IHakulaRequest shoudl be prepared when you want to use all IHakula components.",
+  "source": {
+    "git": "https://github.com/wayde191/IHakulaRequest.git",
+    "tag": "0.4.0"
+  },
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "requires_arc": true,
+  "frameworks": [
+    "UIKit",
+    "Foundation",
+    "CFNetwork",
+    "SystemConfiguration",
+    "MobileCoreServices",
+    "CoreGraphics"
+  ],
+  "libraries": "z",
+  "dependencies": {
+    "IHakulaInfrastructure": [
+      "~> 0.2.0"
+    ],
+    "Reachability": [
+      "~> 3.2"
+    ]
+  },
+  "public_header_files": "IHakulaRequest/IHakulaRequest/**/*.{h}",
+  "source_files": "IHakulaRequest/IHakulaRequest/*.{h}",
+  "subspecs": [
+    {
+      "name": "MVC",
+      "dependencies": {
+        "IHakulaRequest/Network": [
+
+        ]
+      },
+      "source_files": "IHakulaRequest/IHakulaRequest/MVC/**/*.{h,m}"
+    },
+    {
+      "name": "Network",
+      "dependencies": {
+        "IHakulaRequest/ASI": [
+
+        ]
+      },
+      "source_files": "IHakulaRequest/IHakulaRequest/Network/*.{h,m}"
+    },
+    {
+      "name": "ASI",
+      "source_files": "IHakulaRequest/IHakulaRequest/ASIRequest/*.{h,m}"
+    }
+  ]
+}

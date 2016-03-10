@@ -1,0 +1,1 @@
+IHAKULAREQUEST_OTHER_LDFLAGS = -l"z" -framework "CFNetwork" -framework "CoreGraphics" -framework "Foundation" -framework "MobileCoreServices" -framework "SystemConfiguration" -framework "UIKit"
