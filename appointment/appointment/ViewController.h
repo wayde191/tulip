@@ -6,9 +6,9 @@
 //  Copyright © 2016 tulip. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BBQBaseViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : BBQBaseViewController
 
 
 @end

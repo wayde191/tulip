@@ -17,19 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_logo_middle" translatesAutoresizingMaskIntoConstraints="NO" id="TbY-0C-Pl2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="TbY-0C-Pl2">
                                 <rect key="frame" x="109" y="255" width="157" height="157"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="157" id="06o-TM-4LR"/>
-                                    <constraint firstAttribute="width" constant="157" id="PJT-FV-ia5"/>
+                                    <constraint firstAttribute="width" constant="157" id="0FX-U2-ojb"/>
+                                    <constraint firstAttribute="height" constant="157" id="3xd-6o-Sh7"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="TbY-0C-Pl2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CvM-HO-Yj1"/>
-                            <constraint firstItem="TbY-0C-Pl2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jeC-13-Pg7"/>
+                            <constraint firstItem="TbY-0C-Pl2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2tS-BH-Usn"/>
+                            <constraint firstItem="TbY-0C-Pl2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="uXj-bO-q3P"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="start_logo_middle" width="268" height="268"/>
+        <image name="welcome" width="268" height="268"/>
     </resources>
 </document>

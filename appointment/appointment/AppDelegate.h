@@ -21,6 +21,9 @@
 - (void)showMenu;
 - (void)hideMenu;
 
+- (void)showAdView;
+- (void)hideAdView;
+
 - (void)clearNotification;
 + (AppDelegate *)getSharedAppDelegate;
 

@@ -11,23 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y26-I5-xrw">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_logo_middle" translatesAutoresizingMaskIntoConstraints="NO" id="BcD-4C-Qwd">
-                            <rect key="frame" x="109" y="255" width="157" height="157"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="157" id="VhQ-hH-wRA"/>
-                                <constraint firstAttribute="width" constant="157" id="u85-EN-oSF"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.90980392160000001" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="BcD-4C-Qwd" firstAttribute="centerX" secondItem="Y26-I5-xrw" secondAttribute="centerX" id="Ltv-R9-HAg"/>
-                        <constraint firstItem="BcD-4C-Qwd" firstAttribute="centerY" secondItem="Y26-I5-xrw" secondAttribute="centerY" id="eJm-66-zvd"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf9-Eo-get">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
@@ -84,6 +67,23 @@
                         <constraint firstItem="L8y-pk-Jeq" firstAttribute="top" secondItem="NrZ-GE-sme" secondAttribute="bottom" id="a75-RU-Gqp"/>
                         <constraint firstItem="NrZ-GE-sme" firstAttribute="leading" secondItem="Yf9-Eo-get" secondAttribute="leading" id="bRB-2I-Yg3"/>
                         <constraint firstAttribute="bottom" secondItem="L8y-pk-Jeq" secondAttribute="bottom" id="xFF-al-bzx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y26-I5-xrw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_logo_middle" translatesAutoresizingMaskIntoConstraints="NO" id="BcD-4C-Qwd">
+                            <rect key="frame" x="109" y="255" width="157" height="157"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="157" id="VhQ-hH-wRA"/>
+                                <constraint firstAttribute="width" constant="157" id="u85-EN-oSF"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="BcD-4C-Qwd" firstAttribute="centerX" secondItem="Y26-I5-xrw" secondAttribute="centerX" id="Ltv-R9-HAg"/>
+                        <constraint firstItem="BcD-4C-Qwd" firstAttribute="centerY" secondItem="Y26-I5-xrw" secondAttribute="centerY" id="eJm-66-zvd"/>
                     </constraints>
                 </view>
             </subviews>

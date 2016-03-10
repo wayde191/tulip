@@ -12,14 +12,14 @@
 #import "BBQ+ShareSDK.h"
 #import "APService.h"
 #import "NotificationView.h"
-
+#import "AdView.h"
 
 @interface AppDelegate (){
     NotificationView *_notView;
+    AdView *_adView;
 }
 
 - (void)setupNotificationView;
-
 @end
 
 @implementation AppDelegate
@@ -33,7 +33,7 @@
     
     [self initChineseShareSDK];
 //    [self initWindows:application];
-    [self setupNotificationView];
+    [self setupViews];
     
     [User sharedInstance];
     
@@ -234,12 +234,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-#pragma mark - Notification View
-- (void)setupNotificationView {
-    _notView = [NotificationView viewFromNib];
-    [self.window addSubview:_notView];
-}
-
 #pragma mark - Public Methods
 - (void)showMenu {
     [self.window bringSubviewToFront:_notView];
@@ -259,7 +253,41 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 - (void)showMsg:(NSString *)message {
 }
 
+#pragma mark - Notification View
+- (void)setupNotificationView {
+    _notView = [NotificationView viewFromNib];
+    [self.window addSubview:_notView];
+}
+
+#pragma mark - Ad View
+- (void)showAdView {
+    _adView.left = 0;
+    _adView.top = 0;
+    [self.window bringSubviewToFront:_adView];
+}
+
+- (void)hideAdView {
+    _adView.left = IH_DEVICE_WIDTH;
+    [self.window sendSubviewToBack:_adView];
+}
+
+- (void)setupAdView {
+    _adView = [AdView viewFromNib];
+    _adView.width = IH_DEVICE_WIDTH;
+    _adView.height = IH_DEVICE_HEIGHT;
+    _adView.adClickedBlock = ^(NSString *url){
+        iHDINFO(@"---- %@", url);
+    };
+    iHDINFO(@"%@", _adView);
+    [self.window addSubview:_adView];
+}
+
 #pragma mark - Private Methods
+- (void)setupViews {
+    [self setupNotificationView];
+    [self setupAdView];
+}
+
 - (void)initWindows:(UIApplication *)application {
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     self.window = [[UIWindow alloc] initWithFrame:screenBounds];

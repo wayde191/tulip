@@ -47,8 +47,8 @@
     self.hidesBottomBarWhenPushed = YES;
     appDelegate = [AppDelegate getSharedAppDelegate];
     
-    [self adjustElementsConstrantHeight];
-    [self setupNavigationItems];
+//    [self adjustElementsConstrantHeight];
+//    [self setupNavigationItems];
 }
 
 - (BOOL)getNotificationReceivedNotLoggedIn {

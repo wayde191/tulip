@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5460E63B000D57ED427FC06D"
+               BlueprintIdentifier = "3AE52FD8F0A15B488B374DA2"
                BuildableName = "libIHakulaInfrastructure.a"
                BlueprintName = "IHakulaInfrastructure"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -10,6 +10,7 @@ platform :ios, '7.1'
 def commonPods
     pod 'IHakulaInfrastructure', :path => './iHakula/IHakulaInfrastructure'
     pod 'IHakulaRequest', :path => './iHakula/IHakulaRequest'
+    pod 'SDWebImage'
 end
 
 target 'appointment' do
