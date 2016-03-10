@@ -24,6 +24,18 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:FALSE animated:TRUE];
+}
+
 #pragma mark - Public Method
 - (void)adClicked:(NSString *)url {
     [appDelegate hideAdView];
