@@ -26,6 +26,7 @@
 
 #pragma mark - Public Method
 - (void)adClicked:(NSString *)url {
+    [appDelegate hideAdView];
     iHDINFO(@"--- %@", url);
 }
 

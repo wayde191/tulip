@@ -266,8 +266,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)showAdView {
-    _adView.left = 0;
-    _adView.top = 0;
     [self.window bringSubviewToFront:_adView];
 }
 
