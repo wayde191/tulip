@@ -43,6 +43,7 @@ static User *singletonInstance = nil;
     NSString *_userEmail;
     NSString *_userName;
     
+    
     void(^ _getAllFundsWhenDone)(void) ;
 }
 
@@ -303,6 +304,7 @@ static User *singletonInstance = nil;
     [super serviceCallSuccess:response];
     if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
         iHDINFO(@"%@", response.userInfoDic);
+        self.dynamicMenuArr = response.userInfoDic[@"data"];
     }
 }
 

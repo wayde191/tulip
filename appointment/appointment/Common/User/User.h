@@ -16,9 +16,7 @@
 
 @property (nonatomic, strong) NSDictionary *userPreferedStartEndTimeDic;
 
-@property (nonatomic, strong) NSDictionary *goodsTypeDic;
-@property (nonatomic, assign) NSInteger cartFoodsNumber;
-@property (nonatomic, strong) NSMutableDictionary *goodsDic;
+@property (nonatomic, strong) NSArray *dynamicMenuArr;
 
 // Class Methods
 + (User *)sharedInstance;
