@@ -313,7 +313,7 @@ static User *singletonInstance = nil;
 {
     [super serviceCallFailed:response];
     if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
-        
+        [_appDelegate showAds:@{}];
     } else if ([response.serviceName isEqualToString:GET_AD_SERVICE]) {
         [_appDelegate showAds:@{}];
     }

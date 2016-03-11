@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "WebViewController.h"
 
 @interface ViewController ()
 
@@ -47,8 +48,33 @@
     iHDINFO(@"--- %@", data);
 }
 
+- (IBAction)allOptionsButtonClicked:(id)sender {
+    [self gotoWebViewController];
+}
+
+- (IBAction)onlyHospitalButtonClicked:(id)sender {
+    [self gotoWebViewController];
+}
+
+- (IBAction)onlyDoctorButtonClicked:(id)sender {
+    [self gotoWebViewController];
+}
+
 - (IBAction)onMenuButtonClicked:(id)sender {
     [appDelegate showMenu];
+}
+
+- (void)gotoWebViewController {
+    [self performSegueWithIdentifier:@"WebViewController" sender:nil];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    id vc = segue.destinationViewController;
+    if ([vc isKindOfClass:[WebViewController class]]) {
+//        [(WebViewController *)vc setCellModel:cellModel];
+    }
 }
 
 @end

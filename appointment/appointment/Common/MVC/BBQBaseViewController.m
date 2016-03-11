@@ -45,7 +45,9 @@
 {
     [super viewDidLoad];
     self.hidesBottomBarWhenPushed = YES;
-    appDelegate = [AppDelegate getSharedAppDelegate];    
+    appDelegate = [AppDelegate getSharedAppDelegate];
+    
+    [self setupNavigationItems];
 }
 
 - (BOOL)getNotificationReceivedNotLoggedIn {
@@ -239,26 +241,29 @@
 
 - (void)setupNavigationItems
 {
+    [self.navigationController.navigationBar setBackgroundColor:NAV_BAR_BG_NORMAL_COLOR];
+    self.navigationController.navigationBar.tintColor = NAV_BAR_TITLE_NORMAL_COLOR;
+    
     NSShadow *shadow = [[NSShadow alloc] init];    
-    NSDictionary *dic = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                          NSFontAttributeName:[UIFont regularSTHeitiFontOfSize:17.0],
+    NSDictionary *dic = @{NSForegroundColorAttributeName:NAV_BAR_TITLE_NORMAL_COLOR,
+                          NSFontAttributeName:[UIFont systemFontOfSize:15.0],
                           NSShadowAttributeName:shadow};
     self.navigationController.navigationBar.titleTextAttributes = dic;
-    
-    if (IOS7_OR_LATER) {
-        UIImage *navBg = [UIImage imageNamed:@"navbar_bg"];
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageCompressForSize:navBg targetSize:CGSizeMake(IH_DEVICE_WIDTH, navBg.size.height)] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
-        self.extendedLayoutIncludesOpaqueBars = FALSE;
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.automaticallyAdjustsScrollViewInsets = FALSE;
-        
-    } else {
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
-    }
-    
-    if (self.navigationController.viewControllers.count > 1) {
-        [self leftItemImage:@"nav_left_btn" target:self action:@selector(back)];
-    }
+//
+//    if (IOS7_OR_LATER) {
+//        UIImage *navBg = [UIImage imageNamed:@"navbar_bg"];
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageCompressForSize:navBg targetSize:CGSizeMake(IH_DEVICE_WIDTH, navBg.size.height)] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+//        self.extendedLayoutIncludesOpaqueBars = FALSE;
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//        self.automaticallyAdjustsScrollViewInsets = FALSE;
+//        
+//    } else {
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
+//    }
+//    
+//    if (self.navigationController.viewControllers.count > 1) {
+//        [self leftItemImage:@"nav_left_btn" target:self action:@selector(back)];
+//    }
 }
 
 - (void)setNavBarDefaultStyle {

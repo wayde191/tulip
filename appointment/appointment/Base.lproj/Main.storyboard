@@ -126,6 +126,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdx-pE-c2G">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="159"/>
+                                        <connections>
+                                            <action selector="allOptionsButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Gx-UT-FpQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -215,6 +218,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK3-PU-2IO">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="159"/>
+                                        <connections>
+                                            <action selector="onlyHospitalButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HNQ-Mg-JTY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -261,6 +267,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qz7-tm-DfA">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="159"/>
+                                        <connections>
+                                            <action selector="onlyDoctorButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1HK-6H-BON"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -303,10 +312,31 @@
                     </view>
                     <navigationItem key="navigationItem" id="q5a-Ly-6Tn"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <segue destination="Ngh-SF-aO7" kind="show" identifier="WebViewController" id="EtO-Q3-tZU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="400.5" y="744.5"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="CuU-aI-9hc">
+            <objects>
+                <viewController id="Ngh-SF-aO7" customClass="WebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dIp-fz-FCb"/>
+                        <viewControllerLayoutGuide type="bottom" id="PEM-sj-iu6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n9E-hA-vId">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nS9-bl-lY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="959" y="745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EbR-et-qNX">

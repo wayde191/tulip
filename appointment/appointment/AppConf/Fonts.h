@@ -30,6 +30,9 @@
 // #define FONTSIZE_16          [UIFont systemFontOfSize:16.0]
 // #define YAHEI_FONTSIZE_12    [UIFont fontWithName:@"MicrosoftYaHei" size:12.0]
 
+#define NAV_BAR_BG_NORMAL_COLOR         UIColorFromRGB(0xF3F6F6)
+#define NAV_BAR_TITLE_NORMAL_COLOR      UIColorFromRGB(0x2E3642)
+
 #define ADD_LEVEL_COLOR         RGBACOLOR(190, 1, 0, 1)
 #define HERO_EQUI_COLOR         RGBACOLOR(77, 134, 198, 1)
 #define DPS_TAG_COLOR           RGBACOLOR(78, 167, 171, 1)

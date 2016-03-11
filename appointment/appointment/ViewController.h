@@ -12,6 +12,9 @@
 
 - (void)adClicked:(NSString *)url;
 - (void)menuRowClicked:(NSDictionary *)data;
+- (IBAction)allOptionsButtonClicked:(id)sender;
+- (IBAction)onlyHospitalButtonClicked:(id)sender;
+- (IBAction)onlyDoctorButtonClicked:(id)sender;
 
 - (IBAction)onMenuButtonClicked:(id)sender;
 @end

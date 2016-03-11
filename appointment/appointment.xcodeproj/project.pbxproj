@@ -11,6 +11,7 @@
 		BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA73D22B1C919DDF00AC5E9F /* AdView.xib */; };
 		BA9934101C9242C700FD691D /* MenuRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA99340F1C9242C700FD691D /* MenuRowView.m */; };
 		BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9934111C9242DA00FD691D /* MenuRowView.xib */; };
+		BA9934151C92D3E100FD691D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9934141C92D3E100FD691D /* WebViewController.m */; };
 		BAF51FB61C905C6E007F9827 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB51C905C6E007F9827 /* main.m */; };
 		BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB81C905C6E007F9827 /* AppDelegate.m */; };
 		BAF51FBC1C905C6F007F9827 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FBB1C905C6F007F9827 /* ViewController.m */; };
@@ -120,6 +121,8 @@
 		BA99340E1C9242C700FD691D /* MenuRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRowView.h; sourceTree = "<group>"; };
 		BA99340F1C9242C700FD691D /* MenuRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRowView.m; sourceTree = "<group>"; };
 		BA9934111C9242DA00FD691D /* MenuRowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuRowView.xib; sourceTree = "<group>"; };
+		BA9934131C92D3E100FD691D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BA9934141C92D3E100FD691D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BAF51FB11C905C6E007F9827 /* appointment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appointment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF51FB51C905C6E007F9827 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BAF51FB71C905C6E007F9827 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 				BAF51FC51C905C6F007F9827 /* Info.plist */,
 				BAF51FB41C905C6E007F9827 /* Supporting Files */,
 				BAF51FFF1C90F7E9007F9827 /* appointment-Prefix.pch */,
+				BA9934131C92D3E100FD691D /* WebViewController.h */,
+				BA9934141C92D3E100FD691D /* WebViewController.m */,
 			);
 			path = appointment;
 			sourceTree = "<group>";
@@ -809,6 +814,7 @@
 				BAF51FFD1C90F7AF007F9827 /* BBQBaseViewController.m in Sources */,
 				BAF51FFE1C90F7AF007F9827 /* User.m in Sources */,
 				BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */,
+				BA9934151C92D3E100FD691D /* WebViewController.m in Sources */,
 				BAF51FFA1C90F7AF007F9827 /* BBQBaseNavigationController.m in Sources */,
 				BAF520761C90FA34007F9827 /* KeyboardView.m in Sources */,
 				BAF51FF91C90F7AF007F9827 /* BBQBaseModel.m in Sources */,
