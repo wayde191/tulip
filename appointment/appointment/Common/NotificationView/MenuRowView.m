@@ -13,7 +13,7 @@
 
 - (void)setupMenu:(NSDictionary *)data {
     self.dataDic = data;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:_dataDic[@"url"]]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:_dataDic[@"icon"]]];
     [self.textLabel setText:_dataDic[@"text"]];
 }
 

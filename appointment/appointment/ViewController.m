@@ -48,6 +48,7 @@
 }
 
 - (IBAction)onMenuButtonClicked:(id)sender {
+    [appDelegate showMenu];
 }
 
 @end

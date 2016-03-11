@@ -13,85 +13,12 @@
 
 - (NSString *)getOrderStatus:(NSString *)status {
     NSString *readableString = nil;
-    switch ([status intValue]) {
-        case 0:
-            readableString = NH_ORDER_STATUS_0;
-            break;
-        case 1:
-            readableString = NH_ORDER_STATUS_1;
-            break;
-        case 2:
-            readableString = NH_ORDER_STATUS_2;
-            break;
-        case 3:
-            readableString = NH_ORDER_STATUS_3;
-            break;
-        case 4:
-            readableString = NH_ORDER_STATUS_4;
-            break;
-        case 5:
-            readableString = NH_ORDER_STATUS_5;
-            break;
-        case 6:
-            readableString = NH_ORDER_STATUS_6;
-            break;
-        case 7:
-            readableString = NH_ORDER_STATUS_7;
-            break;
-        case 8:
-            readableString = NH_ORDER_STATUS_8;
-            break;
-        case 9:
-            readableString = NH_ORDER_STATUS_9;
-            break;
-        case 10:
-            readableString = NH_ORDER_STATUS_10;
-            break;
-            
-        default:
-            break;
-    }
     
     return readableString;
 }
 
 - (NSString *)getCarLimitStatus:(NSString *)status {
     NSString *readableString = nil;
-    switch ([status intValue]) {
-        case 0:
-            readableString = MK_LIMIT_STATUS_0;
-            break;
-        case 1:
-            readableString = MK_LIMIT_STATUS_1;
-            break;
-        case 2:
-            readableString = MK_LIMIT_STATUS_2;
-            break;
-        case 3:
-            readableString = MK_LIMIT_STATUS_3;
-            break;
-        case 4:
-            readableString = MK_LIMIT_STATUS_4;
-            break;
-        case 5:
-            readableString = MK_LIMIT_STATUS_5;
-            break;
-        case 6:
-            readableString = MK_LIMIT_STATUS_6;
-            break;
-        case 7:
-            readableString = MK_LIMIT_STATUS_7;
-            break;
-        case 8:
-            readableString = MK_LIMIT_STATUS_8;
-            break;
-        case 9:
-            readableString = MK_LIMIT_STATUS_9;
-            break;
-            
-        default:
-            break;
-    }
     
     return readableString;
 }
