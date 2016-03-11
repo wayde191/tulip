@@ -59,30 +59,10 @@ typedef enum {
 #define LP_AUTO_LOGIN                       @"LocatePeopleAutoLogin"
 #define MK_USER_AUTOLOGIN_INFO              @"MKUserAutologinInfo"
 
-#define NH_ORDER_STATUS_0                   @"已提交"
-#define NH_ORDER_STATUS_1                   @"已提交"
-#define NH_ORDER_STATUS_2                   @"已确认"
-#define NH_ORDER_STATUS_3                   @"正在送货中"
-#define NH_ORDER_STATUS_4                   @"已结算"
-#define NH_ORDER_STATUS_5                   @"订单完成"
-#define NH_ORDER_STATUS_6                   @"已取消"
-#define NH_ORDER_STATUS_7                   @"已删除"
-#define NH_ORDER_STATUS_8                   @"一方已评价"
-#define NH_ORDER_STATUS_9                   @"双方已互评"
-#define NH_ORDER_STATUS_10                  @"已完成"
-
-#define MK_LIMIT_STATUS_0                   @"不限行"
-#define MK_LIMIT_STATUS_1                   @"周一限行"
-#define MK_LIMIT_STATUS_2                   @"周二限行"
-#define MK_LIMIT_STATUS_3                   @"周三限行"
-#define MK_LIMIT_STATUS_4                   @"周四限行"
-#define MK_LIMIT_STATUS_5                   @"周五限行"
-#define MK_LIMIT_STATUS_6                   @"周六限行"
-#define MK_LIMIT_STATUS_7                   @"周七限行"
-#define MK_LIMIT_STATUS_8                   @"双日限行"
-#define MK_LIMIT_STATUS_9                   @"单日限行"
 
 ////////////////////////////////////////////////////////////
+#define ANIMATION_DURATION                  0.3f
+
 #define NOTIFICATION_GOODS_CHANGES          @"NotificationFoodsChanges"
 
 #define BBQ_GOODS_KEY                       @"foods"

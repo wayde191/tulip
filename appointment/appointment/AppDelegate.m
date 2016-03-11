@@ -236,15 +236,6 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 #pragma mark - Public Methods
-- (void)showMenu {
-    [self.window bringSubviewToFront:_notView];
-    [_notView showMsg:@""];
-}
-
-- (void)hideMenu {
-    [_notView hideMsg];
-}
-
 - (void)showTodoView {
 }
 
@@ -254,9 +245,35 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 - (void)showMsg:(NSString *)message {
 }
 
+- (void)setupMenu:(NSArray *)menuArr {
+    [_notView setupMenu:menuArr];
+}
+
+- (void)showMenu {
+    [self.window bringSubviewToFront:_notView];
+    [_notView showMenu];
+}
+
+- (void)hideMenu {
+    [self.window sendSubviewToBack:_notView];
+    [_notView hideMenu];
+}
+
 #pragma mark - Notification View
+- (void)menuRowClicked:(NSDictionary *)data {
+    ViewController *rootViewController = [self getRootViewController];
+    
+    [rootViewController menuRowClicked:data];
+}
+
 - (void)setupNotificationView {
     _notView = [NotificationView viewFromNib];
+    _notView.width = IH_DEVICE_WIDTH;
+    _notView.height = IH_DEVICE_HEIGHT;
+    AppDelegate __weak *weakself = self;
+    _notView.menuClickedBlock = ^(NSDictionary *data){
+        [weakself menuRowClicked:data];
+    };
     [self.window addSubview:_notView];
 }
 
@@ -275,8 +292,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)adClicked:(NSString *)url {
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    ViewController *rootViewController = (ViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    ViewController *rootViewController = [self getRootViewController];
     
     [rootViewController adClicked:url];
 }
@@ -295,6 +311,13 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 #pragma mark - Private Methods
+- (ViewController *)getRootViewController {
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    ViewController *rootViewController = (ViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    
+    return rootViewController;
+}
+
 - (void)setupViews {
     [self setupNotificationView];
     [self setupAdView];

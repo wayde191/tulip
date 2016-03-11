@@ -10,11 +10,14 @@
 
 @interface NotificationView : BBQBaseView
 
-@property (weak, nonatomic) IBOutlet UILabel *errLabel;
-- (IBAction)onCloseBtnClicked:(id)sender;
+typedef void (^menuClickedBlock)(NSDictionary *data);
+@property (copy, nonatomic) menuClickedBlock menuClickedBlock;
 
-- (void)showMsg:(NSString *)msg;
-- (void)showStaticMsg:(NSString *)msg;
+@property (strong, nonatomic) NSArray *menuDataArr;
+@property (weak, nonatomic) IBOutlet UIView *menuContainer;
 
-- (void)hideMsg;
+- (void)showMenu;
+- (void)hideMenu;
+
+- (void)setupMenu:(NSArray *)data;
 @end

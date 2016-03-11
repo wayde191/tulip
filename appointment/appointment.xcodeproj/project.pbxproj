@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BA73D22A1C919DCC00AC5E9F /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA73D2291C919DCC00AC5E9F /* AdView.m */; };
 		BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA73D22B1C919DDF00AC5E9F /* AdView.xib */; };
+		BA9934101C9242C700FD691D /* MenuRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA99340F1C9242C700FD691D /* MenuRowView.m */; };
+		BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9934111C9242DA00FD691D /* MenuRowView.xib */; };
 		BAF51FB61C905C6E007F9827 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB51C905C6E007F9827 /* main.m */; };
 		BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB81C905C6E007F9827 /* AppDelegate.m */; };
 		BAF51FBC1C905C6F007F9827 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FBB1C905C6F007F9827 /* ViewController.m */; };
@@ -115,6 +117,9 @@
 		BA73D2281C919DCC00AC5E9F /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		BA73D2291C919DCC00AC5E9F /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		BA73D22B1C919DDF00AC5E9F /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		BA99340E1C9242C700FD691D /* MenuRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRowView.h; sourceTree = "<group>"; };
+		BA99340F1C9242C700FD691D /* MenuRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRowView.m; sourceTree = "<group>"; };
+		BA9934111C9242DA00FD691D /* MenuRowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuRowView.xib; sourceTree = "<group>"; };
 		BAF51FB11C905C6E007F9827 /* appointment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appointment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF51FB51C905C6E007F9827 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BAF51FB71C905C6E007F9827 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -473,6 +478,9 @@
 				BAF520A21C90FC1A007F9827 /* NotificationView.h */,
 				BAF520A31C90FC1A007F9827 /* NotificationView.m */,
 				BAF520A41C90FC1A007F9827 /* NotificationView.xib */,
+				BA99340E1C9242C700FD691D /* MenuRowView.h */,
+				BA99340F1C9242C700FD691D /* MenuRowView.m */,
+				BA9934111C9242DA00FD691D /* MenuRowView.xib */,
 			);
 			path = NotificationView;
 			sourceTree = "<group>";
@@ -740,6 +748,7 @@
 				BAF520BA1C90FC1A007F9827 /* loading0018.png in Resources */,
 				BAF520C81C90FC1B007F9827 /* warning@2x.png in Resources */,
 				BAF520B31C90FC1A007F9827 /* loading0011.png in Resources */,
+				BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */,
 				BAF521071C90FEEA007F9827 /* sound.caf in Resources */,
 				BAF520B01C90FC1A007F9827 /* loading0008.png in Resources */,
 				BAF51FBF1C905C6F007F9827 /* Main.storyboard in Resources */,
@@ -792,6 +801,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA9934101C9242C700FD691D /* MenuRowView.m in Sources */,
 				BAF520C91C90FC1B007F9827 /* FVCustomAlertView.m in Sources */,
 				BAF520CA1C90FC1B007F9827 /* NotificationView.m in Sources */,
 				BAF5214B1C90FFB7007F9827 /* IHShare.m in Sources */,

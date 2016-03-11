@@ -300,8 +300,8 @@ static User *singletonInstance = nil;
 {
     [super serviceCallSuccess:response];
     if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
-        iHDINFO(@"%@", response.userInfoDic);
         self.dynamicMenuArr = response.userInfoDic[@"data"];
+        [_appDelegate setupMenu:self.dynamicMenuArr];
         
     } else if ([response.serviceName isEqualToString:GET_AD_SERVICE]) {
         self.adDic = response.userInfoDic[@"data"];

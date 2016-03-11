@@ -11,5 +11,8 @@
 @interface ViewController : BBQBaseViewController
 
 - (void)adClicked:(NSString *)url;
+- (void)menuRowClicked:(NSDictionary *)data;
+
+- (IBAction)onMenuButtonClicked:(id)sender;
 @end
 

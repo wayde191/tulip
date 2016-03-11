@@ -42,4 +42,12 @@
     iHDINFO(@"--- %@", url);
 }
 
+- (void)menuRowClicked:(NSDictionary *)data {
+    [appDelegate hideMenu];
+    iHDINFO(@"--- %@", data);
+}
+
+- (IBAction)onMenuButtonClicked:(id)sender {
+}
+
 @end

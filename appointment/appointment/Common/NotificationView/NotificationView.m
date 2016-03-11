@@ -9,6 +9,7 @@
 #define NOTIFICATION_VIEW_TOP       130.0f
 
 #import "NotificationView.h"
+#import "MenuRowView.h"
 
 @interface NotificationView () {
 }
@@ -21,33 +22,51 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    if (IS_IPAD) {
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onDeviceOrientationDidChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
-        
-        if (IS_IOS_8) {
-            self.left = IPAD_SCREEN_HEIGHT;
-            self.top = NOTIFICATION_VIEW_TOP;
-        }
-        
-    } else {
-        self.left = IPHONE_SCREEN_WIDTH;
-        self.top = NOTIFICATION_VIEW_TOP;
+    self.left = -1 * IH_DEVICE_WIDTH;
+    self.top = 0;
+}
+
+- (void)menuClicked:(NSDictionary *)data {
+    if (self.menuClickedBlock) {
+        self.menuClickedBlock(data);
     }
 }
 
-- (IBAction)onCloseBtnClicked:(id)sender {
-    [self hideMsg];
+- (void)setupMenu:(NSArray *)data {
+    self.menuDataArr = data;
+    [_menuContainer removeAllSubviews];
+    
+    NotificationView __weak *weakself = self;
+    for (int i = 0; i < _menuDataArr.count; i++) {
+        MenuRowView *row = [MenuRowView viewFromNib];
+        row.width = _menuContainer.width;
+        row.left = 0;
+        row.top = i * row.height;
+        
+        row.menuClickedBlock = ^(NSDictionary *data){
+            [weakself menuClicked:data];
+        };
+        [row setupMenu:_menuDataArr[i]];
+        [_menuContainer addSubview:row];
+    }
+}
+
+- (void)showMenu {
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.left = 0;
+    }];
+}
+
+- (void)hideMenu {
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.left = -1 * IH_DEVICE_WIDTH;
+    }];
 }
 
 //- (void)showMsg:(NSString *)msg {
@@ -234,16 +253,4 @@
 
 #pragma mark -
 #pragma mark Cleanup
-
-//| ----------------------------------------------------------------------------
-- (void)dealloc
-{
-    if (IS_IPAD) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-        
-        // Instruct the system to stop generating device orientation notifications.
-        [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    }
-}
-
 @end
