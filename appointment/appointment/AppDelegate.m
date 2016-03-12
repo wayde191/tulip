@@ -255,7 +255,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)hideMenu {
-    [self.window sendSubviewToBack:_notView];
+//    [self.window sendSubviewToBack:_notView];
     [_notView hideMenu];
 }
 

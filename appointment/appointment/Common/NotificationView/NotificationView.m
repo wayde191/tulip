@@ -66,6 +66,7 @@
 - (void)hideMenu {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.left = -1 * IH_DEVICE_WIDTH;
+    } completion:^(BOOL finished) {
     }];
 }
 
