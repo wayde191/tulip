@@ -348,6 +348,7 @@
                             <constraint firstItem="dKx-gm-bOD" firstAttribute="top" secondItem="n9E-hA-vId" secondAttribute="top" id="U0d-iO-tPq"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="webview" destination="dKx-gm-bOD" id="pOI-eU-p3s"/>
                     </connections>

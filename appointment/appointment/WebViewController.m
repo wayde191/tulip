@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "IHShare.h"
 
 @interface WebViewController ()
 
@@ -19,6 +20,12 @@
     // Do any additional setup after loading the view.
     self.title = @"就诊城市";
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
+}
+
+- (void)onRightSaveButtonClicked:(id)sender {
+    [self showSharePage:self.webview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,5 +131,66 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - ISSShareViewDelegate
+- (void)viewOnWillDisplay:(UIViewController *)viewController shareType:(ShareType)shareType {
+    viewController.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+}
+
+- (void)showSharePage:(id)sender {
+    IHShare *shareGo = [[IHShare alloc] initWithImage:[self getSharingImage] triggerView:sender];
+    shareGo.shareDelegate = self;
+    
+    shareGo.shareSuccessHandler = ^(void){
+        NSLog(@"Success");
+        
+    };
+    shareGo.sharefailsHandler = ^(void){
+        NSLog(@"Fails");
+    };
+    [shareGo showShareActionSheet];
+}
+
+- (UIImage *)getSharingImage {
+    UIImage *newImg = nil;
+//
+//    UIImage *coverImage = self.coverImageView.image;
+//    UIImage *weixinQRCodeImage = ImageNamed(@"bbq_qrcode.jpg");
+//    
+//    NSString *name = self.goodsDic[@"name"];
+//    NSString *price = [NSString stringWithFormat:@"￥%.02f", [self.goodsDic[@"member_price"] floatValue]];
+//    NSString *wexinStr = @"BBQ微信公众号";
+//    
+//    CGFloat margin = 4.0f;
+//    CGFloat coverDisplayWidth = 320.0f;
+//    CGFloat times = coverImage.size.width / coverDisplayWidth;
+//    CGFloat coverDisplayHeight = coverImage.size.height / times;
+//    CGFloat wexinDisplayWidth = coverDisplayWidth;
+//    CGFloat shareImageWidth = coverDisplayWidth + margin * 2;
+//    CGFloat shareImageHeight = coverDisplayHeight + 100 + margin * 2 + wexinDisplayWidth;
+//    
+//    UIFont *font = [UIFont regularSTHeitiFontOfSize:20];
+//    NSDictionary *attrsDictionary =
+//    [NSDictionary dictionaryWithObjectsAndKeys:
+//     font, NSFontAttributeName,
+//     [NSNumber numberWithFloat:1.0], NSBaselineOffsetAttributeName, nil];
+//    
+//    UIGraphicsBeginImageContext(CGSizeMake(shareImageWidth, shareImageHeight));
+//    [[UIColor whiteColor] set];
+//    UIRectFill(CGRectMake(0, 0, shareImageWidth, shareImageHeight));
+//    
+//    [coverImage drawInRect:CGRectMake(margin, margin, coverDisplayWidth, coverDisplayHeight)];
+//    
+//    [name drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2) withAttributes:attrsDictionary];
+//    [price drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2 + 25) withAttributes:attrsDictionary];
+//    [wexinStr drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2 + 70) withAttributes:attrsDictionary];
+//    
+//    [weixinQRCodeImage drawInRect:CGRectMake(margin, shareImageHeight - margin - wexinDisplayWidth, wexinDisplayWidth, wexinDisplayWidth)];
+//    
+//    newImg = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+    return newImg;
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "WebViewController.h"
+#import "IHShare.h"
 
 @interface ViewController ()
 

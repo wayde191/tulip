@@ -8,7 +8,7 @@
 
 #import "BBQBaseViewController.h"
 
-@interface WebViewController : BBQBaseViewController
+@interface WebViewController : BBQBaseViewController <ISSShareViewDelegate>
 
 @property (strong, nonatomic) NSString *urlString;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
