@@ -73,7 +73,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id vc = segue.destinationViewController;
     if ([vc isKindOfClass:[WebViewController class]]) {
-//        [(WebViewController *)vc setCellModel:cellModel];
+        [(WebViewController *)vc setUrlString:@"http://www.baidu.com"];
     }
 }
 

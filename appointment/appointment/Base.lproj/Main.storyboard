@@ -331,12 +331,30 @@
                     <view key="view" contentMode="scaleToFill" id="n9E-hA-vId">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKx-gm-bOD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ngh-SF-aO7" id="eHE-cv-5e2"/>
+                                </connections>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PEM-sj-iu6" firstAttribute="top" secondItem="dKx-gm-bOD" secondAttribute="bottom" id="HdF-ou-lZp"/>
+                            <constraint firstItem="dKx-gm-bOD" firstAttribute="leading" secondItem="n9E-hA-vId" secondAttribute="leading" id="MZZ-Of-it3"/>
+                            <constraint firstAttribute="trailing" secondItem="dKx-gm-bOD" secondAttribute="trailing" id="N8g-ky-vqf"/>
+                            <constraint firstItem="dKx-gm-bOD" firstAttribute="top" secondItem="n9E-hA-vId" secondAttribute="top" id="U0d-iO-tPq"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webview" destination="dKx-gm-bOD" id="pOI-eU-p3s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nS9-bl-lY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959" y="745"/>
+            <point key="canvasLocation" x="958.5" y="744.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EbR-et-qNX">
