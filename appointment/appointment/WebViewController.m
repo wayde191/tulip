@@ -32,6 +32,7 @@
     
     self.title = @"就诊城市";
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,6 +164,8 @@
     } else if ([action isEqualToString:@"dataLoadingClose"]) {
         [self hideMessage];
     } else if ([action isEqualToString:@"screenshot"]) {
+        [self showSharePage:self.webview];
+    } else if ([action isEqualToString:@"socialSharing"]){
         [self showSharePage:self.webview];
     } else if ([action isEqualToString:@"getDeviceId"]) {
         
