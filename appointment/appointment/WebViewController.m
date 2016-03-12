@@ -21,6 +21,10 @@
     self.title = @"就诊城市";
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
     
+//    NSString *html = @"<html><script>window.message = function() {alert(1);}</script><body>hello ???? world ~</div><a herf='tulip:rightActionButton^下一步^http://www.baidu.com'>click</a></body></html>";
+//    
+//    [self.webview loadHTMLString:html baseURL:nil];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
 }
 
@@ -44,10 +48,18 @@
 {
 //    [self setAgent];
 //    self.urlString = [NSString stringWithFormat:@"%@", [request URL]];
-//    if ([[[request URL] scheme] isEqualToString:@"https"]) {
+    NSString *url = [NSString stringWithFormat:@"%@", [request URL]];
+    NSString *first = [url stringByReplacingOccurrencesOfString:@"tulip:" withString:@""];
+    NSArray *second = [first componentsSeparatedByString:@"00110011"];
+    if ([[[request URL] scheme] isEqualToString:@"tulip"]) {
+        iHDINFO(@"%@", first);
+        iHDINFO(@"%@", second);
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[second[1] stringByRemovingPercentEncoding] style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
+        return NO;
+        
 //        [self addTrustedHost:self.urlString];
-//    }
-//    
+    }
+//
 //    // Goto load app page
 //    NSArray *urlComps = [self.urlString componentsSeparatedByString:@"://"];//根据://标记将字符串分成数组
 //    
@@ -70,8 +82,9 @@
     [self hideMessage];
     
 //    NSString *absoluteString = [self.webView.request.URL absoluteString];
-    //    NSString *documentElement = [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement"];
-    //    ITTDINFO(@"documentElement %@", documentElement);
+        NSString *documentElement = [self.webview stringByEvaluatingJavaScriptFromString:@"window.messagePara(789)"];
+        iHDINFO(@"documentElement %@", documentElement);
+    
     //    NSString *innerText = [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
     //    ITTDINFO(@"absoluteString %@", absoluteString);
     /*
