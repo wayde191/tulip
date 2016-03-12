@@ -8,8 +8,17 @@
 
 #import "WebViewController.h"
 #import "IHShare.h"
+#import "NavButton.h"
 
-@interface WebViewController ()
+#define SEPARATED_SIGNAL @"00110011"
+#define TULIP_PROTOCOL   @"tulip"
+
+@interface WebViewController (){
+    NSString *_leftUrl;
+    NSString *_leftScriptStr;
+    NSString *_rightUrl;
+    NSString *_rightScriptStr;
+}
 
 @end
 
@@ -17,15 +26,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _trustedHosts = [[NSMutableArray alloc] init];
+    
     self.title = @"就诊城市";
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
     
-//    NSString *html = @"<html><script>window.message = function() {alert(1);}</script><body>hello ???? world ~</div><a herf='tulip:rightActionButton^下一步^http://www.baidu.com'>click</a></body></html>";
-//    
-//    [self.webview loadHTMLString:html baseURL:nil];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
 }
 
 - (void)onRightSaveButtonClicked:(id)sender {
@@ -46,19 +52,21 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-//    [self setAgent];
-//    self.urlString = [NSString stringWithFormat:@"%@", [request URL]];
-    NSString *url = [NSString stringWithFormat:@"%@", [request URL]];
-    NSString *first = [url stringByReplacingOccurrencesOfString:@"tulip:" withString:@""];
-    NSArray *second = [first componentsSeparatedByString:@"00110011"];
-    if ([[[request URL] scheme] isEqualToString:@"tulip"]) {
-        iHDINFO(@"%@", first);
-        iHDINFO(@"%@", second);
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[second[1] stringByRemovingPercentEncoding] style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
+    [self setAgent];
+    
+    if ([[[request URL] scheme] isEqualToString:TULIP_PROTOCOL]) {
+        NSString *url = [NSString stringWithFormat:@"%@", [request URL]];
+        NSString *infoStr = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:", TULIP_PROTOCOL] withString:@""];
+        NSArray *infoArr = [infoStr componentsSeparatedByString:SEPARATED_SIGNAL];
+        [self dispatch:infoArr];
+        
         return NO;
         
-//        [self addTrustedHost:self.urlString];
+    } else if ([[[request URL] scheme] isEqualToString:@"https"]) {
+        [self addTrustedHost:self.urlString];
     }
+    
+    self.urlString = [NSString stringWithFormat:@"%@", [request URL]];
 //
 //    // Goto load app page
 //    NSArray *urlComps = [self.urlString componentsSeparatedByString:@"://"];//根据://标记将字符串分成数组
@@ -74,33 +82,15 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self showMessage:@"Loading..."];
+    [self showMessage:@"加载中..."];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [self hideMessage];
     
-//    NSString *absoluteString = [self.webView.request.URL absoluteString];
-        NSString *documentElement = [self.webview stringByEvaluatingJavaScriptFromString:@"window.messagePara(789)"];
-        iHDINFO(@"documentElement %@", documentElement);
-    
-    //    NSString *innerText = [self.webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
-    //    ITTDINFO(@"absoluteString %@", absoluteString);
-    /*
-     * detect /epayPage/epay? pay done url
-     */
-    
-//    <a href="callback:whatever">Click me</a>
-//    if ( [[[inRequest URL] scheme] isEqualToString:@"callback"] ) {
-    
-//    if (absoluteString)
-//    {
-//        NSRange foundRange = [absoluteString rangeOfString:@"/epayPage/epay?"];
-//        if(foundRange.location != NSNotFound) {
-//            [self doGetPayDoneOrderlist];
-//        }
-//    }
+    NSString *absoluteString = [self.webview.request.URL absoluteString];
+    iHDINFO(@"absoluteString %@", absoluteString);
 }
 
 
@@ -111,28 +101,9 @@
 }
 
 - (void)addTrustedHost:(NSString *)trustedHost {
-//    if (![_trustedHosts containsObject:trustedHost]) {
-//        [_trustedHosts addObject:trustedHost];
-//        
-//        NSURL *payURL = [NSURL URLWithString:trustedHost];
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:payURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-//        [request setHTTPMethod :@"POST" ];
-//        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//        
-//        //use choose to trust the certificate and send asynchronous request
-//        NSURLConnection *theConncetion = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//        if (theConncetion) {
-//            theData = [[NSMutableData alloc] initWithData:nil];
-//            ITTDINFO(@"ok");
-//        }else{
-//            ITTDINFO(@"error");
-//        }
-//        
-//        while(!finished) {
-//            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-//        }
-//        
-//    }
+    if (![_trustedHosts containsObject:trustedHost]) {
+        [_trustedHosts addObject:trustedHost];
+    }
 }
 
 /*
@@ -204,6 +175,70 @@
 //    UIGraphicsEndImageContext();
 //    
     return newImg;
+}
+
+#pragma mark - Dispatch HTML event
+- (void)dispatch:(NSArray *)order {
+    NSString *action = order[0];
+    if ([action isEqualToString:@"leftActionButton"]) {
+        [self setLeftButton:order];
+    } else if ([action isEqualToString:@"rightActionButton"]) {
+        [self setRightButton:order];
+    } else if ([action isEqualToString:@"dataLoadingOpen"]) {
+        [self hideMessage];
+        [self showMessage:@"加载中..."];
+    } else if ([action isEqualToString:@"dataLoadingClose"]) {
+        [self hideMessage];
+    } else if ([action isEqualToString:@"screenshot"]) {
+        
+    } else if ([action isEqualToString:@"getDeviceId"]) {
+    } else if ([action isEqualToString:@"getLocation"]) {
+    }
+    
+}
+
+- (void)setLeftButton:(NSArray *)order {
+    NavButton *navButton = [NavButton viewFromNib];
+    [navButton makeAsLeftNavigationButton];
+    navButton.backLabel.text = [order[1] stringByRemovingPercentEncoding];
+    if ([[order[2] substringToIndex:[@"javascript:" length]] isEqualToString:@"javascript:"]) {
+        _leftUrl = nil;
+        _leftScriptStr = order[2];
+    } else {
+        _leftUrl = order[2];
+    }
+    [navButton.button addTarget:self action:@selector(onLeftButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navButton];
+}
+
+- (void)onLeftButtonClicked {
+    if (_leftUrl) {
+        [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_leftUrl]]];
+    } else {
+        [self.webview stringByEvaluatingJavaScriptFromString:_leftScriptStr];
+    }
+}
+
+- (void)setRightButton:(NSArray *)order {
+    NavButton *navButton = [NavButton viewFromNib];
+    [navButton makeAsRightNavigationButton];
+    navButton.nextLabel.text = [order[1] stringByRemovingPercentEncoding];
+    if ([[order[2] substringToIndex:[@"javascript:" length]] isEqualToString:@"javascript:"]) {
+        _rightUrl = nil;
+        _rightScriptStr = order[2];
+    } else {
+        _rightUrl = order[2];
+    }
+    [navButton.button addTarget:self action:@selector(onRightButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navButton];
+}
+
+- (void)onRightButtonClicked {
+    if (_rightUrl) {
+        [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_rightUrl]]];
+    } else {
+        [self.webview stringByEvaluatingJavaScriptFromString:_rightScriptStr];
+    }
 }
 
 @end

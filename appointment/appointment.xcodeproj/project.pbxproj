@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BA73D22A1C919DCC00AC5E9F /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA73D2291C919DCC00AC5E9F /* AdView.m */; };
 		BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA73D22B1C919DDF00AC5E9F /* AdView.xib */; };
+		BA7E18EF1C943DFE00DCEEC1 /* NavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7E18EE1C943DFE00DCEEC1 /* NavButton.m */; };
+		BA7E18F11C943E2700DCEEC1 /* NavButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7E18F01C943E2700DCEEC1 /* NavButton.xib */; };
 		BA9934101C9242C700FD691D /* MenuRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA99340F1C9242C700FD691D /* MenuRowView.m */; };
 		BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9934111C9242DA00FD691D /* MenuRowView.xib */; };
 		BA9934151C92D3E100FD691D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9934141C92D3E100FD691D /* WebViewController.m */; };
@@ -119,6 +121,9 @@
 		BA73D2281C919DCC00AC5E9F /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		BA73D2291C919DCC00AC5E9F /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		BA73D22B1C919DDF00AC5E9F /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		BA7E18ED1C943DFE00DCEEC1 /* NavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavButton.h; sourceTree = "<group>"; };
+		BA7E18EE1C943DFE00DCEEC1 /* NavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavButton.m; sourceTree = "<group>"; };
+		BA7E18F01C943E2700DCEEC1 /* NavButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavButton.xib; sourceTree = "<group>"; };
 		BA99340E1C9242C700FD691D /* MenuRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRowView.h; sourceTree = "<group>"; };
 		BA99340F1C9242C700FD691D /* MenuRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRowView.m; sourceTree = "<group>"; };
 		BA9934111C9242DA00FD691D /* MenuRowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuRowView.xib; sourceTree = "<group>"; };
@@ -359,6 +364,16 @@
 			path = AdView;
 			sourceTree = "<group>";
 		};
+		BA7E18EC1C943DBC00DCEEC1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				BA7E18ED1C943DFE00DCEEC1 /* NavButton.h */,
+				BA7E18EE1C943DFE00DCEEC1 /* NavButton.m */,
+				BA7E18F01C943E2700DCEEC1 /* NavButton.xib */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		BAF51FA81C905C6E007F9827 = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +434,7 @@
 		BAF51FEA1C90F7AF007F9827 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA7E18EC1C943DBC00DCEEC1 /* Buttons */,
 				BA73D2271C919DA700AC5E9F /* AdView */,
 				BAF5211D1C90FFB6007F9827 /* Share */,
 				BAF520D21C90FEE9007F9827 /* JPush */,
@@ -743,6 +759,7 @@
 				BAF521531C90FFB7007F9827 /* Resource.bundle in Resources */,
 				BAF520A71C90FC1A007F9827 /* cross.png in Resources */,
 				BAF520AF1C90FC1A007F9827 /* loading0007.png in Resources */,
+				BA7E18F11C943E2700DCEEC1 /* NavButton.xib in Resources */,
 				BAF520CB1C90FC1B007F9827 /* NotificationView.xib in Resources */,
 				BAF520B41C90FC1A007F9827 /* loading0012.png in Resources */,
 				BAF520AE1C90FC1A007F9827 /* loading0006.png in Resources */,
@@ -823,6 +840,7 @@
 				BAF520761C90FA34007F9827 /* KeyboardView.m in Sources */,
 				BAF51FF91C90F7AF007F9827 /* BBQBaseModel.m in Sources */,
 				BAF51FFC1C90F7AF007F9827 /* BBQBaseView.m in Sources */,
+				BA7E18EF1C943DFE00DCEEC1 /* NavButton.m in Sources */,
 				BAF51FFB1C90F7AF007F9827 /* BBQBaseTableViewCell.m in Sources */,
 				BAF51FB61C905C6E007F9827 /* main.m in Sources */,
 				BAF520781C90FA34007F9827 /* NetworkIssueView.m in Sources */,
