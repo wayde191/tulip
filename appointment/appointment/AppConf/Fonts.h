@@ -9,21 +9,6 @@
 #ifndef Journey_Fonts_h
 #define Journey_Fonts_h
 
-
-//webview顶部灰色文字：#7B8695
-//webview顶部中间文字：#2E3642
-//webview顶部背景：#F3F6F6
-//webview下方分割线：#A2A7A7
-//红色：#FC4C75
-//启动页背景&webview背景色：#E8EFEF
-
-//抽屉菜单接口：http://sandbox.api.sibosen.com/v2/settings/menu
-//欢迎页无广告：http://sandbox.api.sibosen.com/v2/settings/ad1
-//欢迎页有广告：http://sandbox.api.sibosen.com/v2/settings/ad2
-
-//APP字体：http://pan.baidu.com/s/1bnRXf0z
-//密码：it61
-
 // Example
 // #define EXAMPLE_COLOR        RGBACOLOR(1, 1, 1, 1)
 // #define FONTSIZE_BOLD_17     [UIFont boldSystemFontOfSize:17.0]
