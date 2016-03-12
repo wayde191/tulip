@@ -173,28 +173,27 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
      
      如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
      **/
-    [ShareSDK connectQZoneWithAppKey:@"1104810786"
-                           appSecret:@"wINeTsix8gxGyCJn"
+    [ShareSDK connectQZoneWithAppKey:@"1105058817"
+                           appSecret:@"SlHYIV7RjWvuwz6F"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     
-    /**
-     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
-     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
-     **/
-    [ShareSDK connectWeChatWithAppId:@"wx375d860763d5551c"
-                           appSecret:@"07ffc7fd87794171aa5e2d7efaa159bf"
-                           wechatCls:[WXApi class]];
     /**
      连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
      http://mobile.qq.com/api/上注册应用，并将相关信息填写到以下字段
      **/
     
-    [ShareSDK connectQQWithQZoneAppKey:@"1104810786"
+    [ShareSDK connectQQWithQZoneAppKey:@"1105058817"
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
-    
+    /**
+     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
+     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+     **/
+    [ShareSDK connectWeChatWithAppId:@"wx751499ac946cea2b"
+                           appSecret:@"0edb7e5a2f2c8e37a549a60a1fa06cd1"
+                           wechatCls:[WXApi class]];
 }
 
 #pragma mark - 如果使用SSO（可以简单理解成客户端授权），以下方法是必要的

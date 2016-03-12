@@ -129,6 +129,13 @@ static User *singletonInstance = nil;
     return @"";
 }
 
+- (NSString *)getUUID {
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return (__bridge NSString *)string;
+}
+
 - (void)doUploadToken {
 //    theRequest.requestMethod = iHRequestMethodPost;
     NSString *token = [USER_DEFAULT objectForKey:IH_DEVICE_TOKEN];

@@ -13,6 +13,8 @@
 #define SEPARATED_SIGNAL @"00110011"
 #define TULIP_PROTOCOL   @"tulip"
 
+#define FIRST_SCREEN_HEIGHT             300
+
 @interface WebViewController (){
     NSString *_leftUrl;
     NSString *_leftScriptStr;
@@ -30,17 +32,10 @@
     
     self.title = @"就诊城市";
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(onRightSaveButtonClicked:)];
-}
-
-- (void)onRightSaveButtonClicked:(id)sender {
-    [self showSharePage:self.webview];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma --WebViewDelegate--
@@ -106,16 +101,6 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - ISSShareViewDelegate
 - (void)viewOnWillDisplay:(UIViewController *)viewController shareType:(ShareType)shareType {
     viewController.navigationController.navigationBar.barTintColor = [UIColor blackColor];
@@ -137,44 +122,32 @@
 
 - (UIImage *)getSharingImage {
     UIImage *newImg = nil;
-//
-//    UIImage *coverImage = self.coverImageView.image;
-//    UIImage *weixinQRCodeImage = ImageNamed(@"bbq_qrcode.jpg");
-//    
-//    NSString *name = self.goodsDic[@"name"];
-//    NSString *price = [NSString stringWithFormat:@"￥%.02f", [self.goodsDic[@"member_price"] floatValue]];
-//    NSString *wexinStr = @"BBQ微信公众号";
-//    
-//    CGFloat margin = 4.0f;
-//    CGFloat coverDisplayWidth = 320.0f;
-//    CGFloat times = coverImage.size.width / coverDisplayWidth;
-//    CGFloat coverDisplayHeight = coverImage.size.height / times;
-//    CGFloat wexinDisplayWidth = coverDisplayWidth;
-//    CGFloat shareImageWidth = coverDisplayWidth + margin * 2;
-//    CGFloat shareImageHeight = coverDisplayHeight + 100 + margin * 2 + wexinDisplayWidth;
-//    
-//    UIFont *font = [UIFont regularSTHeitiFontOfSize:20];
-//    NSDictionary *attrsDictionary =
-//    [NSDictionary dictionaryWithObjectsAndKeys:
-//     font, NSFontAttributeName,
-//     [NSNumber numberWithFloat:1.0], NSBaselineOffsetAttributeName, nil];
-//    
-//    UIGraphicsBeginImageContext(CGSizeMake(shareImageWidth, shareImageHeight));
-//    [[UIColor whiteColor] set];
-//    UIRectFill(CGRectMake(0, 0, shareImageWidth, shareImageHeight));
-//    
-//    [coverImage drawInRect:CGRectMake(margin, margin, coverDisplayWidth, coverDisplayHeight)];
-//    
-//    [name drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2) withAttributes:attrsDictionary];
-//    [price drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2 + 25) withAttributes:attrsDictionary];
-//    [wexinStr drawAtPoint:CGPointMake(margin, coverDisplayHeight + margin * 2 + 70) withAttributes:attrsDictionary];
-//    
-//    [weixinQRCodeImage drawInRect:CGRectMake(margin, shareImageHeight - margin - wexinDisplayWidth, wexinDisplayWidth, wexinDisplayWidth)];
-//    
-//    newImg = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
+    
+    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    CGFloat posterHeight = self.webview.scrollView.contentSize.height + 30.0f;
+    UIImage *img1 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:FIRST_SCREEN_HEIGHT];
+    
+    [self.webview.scrollView setContentOffset:CGPointMake(0, FIRST_SCREEN_HEIGHT)];
+    UIImage *img2 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:posterHeight];
+    
+    UIGraphicsBeginImageContext(CGSizeMake(IH_DEVICE_WIDTH, posterHeight));
+    [img2 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, posterHeight)];
+    [img1 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, FIRST_SCREEN_HEIGHT)];
+    newImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     return newImg;
+}
+
+- (UIImage *)takeScreenShotFromView:(UIView *)scrollview
+                          withWidth:(float)width
+                          andHeight:(float)height
+{
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    [scrollview.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
 }
 
 #pragma mark - Dispatch HTML event
@@ -190,11 +163,11 @@
     } else if ([action isEqualToString:@"dataLoadingClose"]) {
         [self hideMessage];
     } else if ([action isEqualToString:@"screenshot"]) {
-        
+        [self showSharePage:self.webview];
     } else if ([action isEqualToString:@"getDeviceId"]) {
+        
     } else if ([action isEqualToString:@"getLocation"]) {
     }
-    
 }
 
 - (void)setLeftButton:(NSArray *)order {

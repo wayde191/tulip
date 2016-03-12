@@ -23,6 +23,7 @@
 
 @property(strong, nonatomic) CLLocation *myLocation;
 
+- (NSString *)getUUID;
 - (NSString *)getAddress;
 - (void)uploadLocation;
 
