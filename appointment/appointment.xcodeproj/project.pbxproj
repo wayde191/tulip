@@ -12,6 +12,7 @@
 		BA9934101C9242C700FD691D /* MenuRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA99340F1C9242C700FD691D /* MenuRowView.m */; };
 		BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9934111C9242DA00FD691D /* MenuRowView.xib */; };
 		BA9934151C92D3E100FD691D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9934141C92D3E100FD691D /* WebViewController.m */; };
+		BAA9F6331C93C880006F0B0A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA9F6321C93C880006F0B0A /* CoreLocation.framework */; };
 		BAF51FB61C905C6E007F9827 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB51C905C6E007F9827 /* main.m */; };
 		BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB81C905C6E007F9827 /* AppDelegate.m */; };
 		BAF51FBC1C905C6F007F9827 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FBB1C905C6F007F9827 /* ViewController.m */; };
@@ -123,6 +124,7 @@
 		BA9934111C9242DA00FD691D /* MenuRowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuRowView.xib; sourceTree = "<group>"; };
 		BA9934131C92D3E100FD691D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		BA9934141C92D3E100FD691D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		BAA9F6321C93C880006F0B0A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BAF51FB11C905C6E007F9827 /* appointment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appointment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF51FB51C905C6E007F9827 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BAF51FB71C905C6E007F9827 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA9F6331C93C880006F0B0A /* CoreLocation.framework in Frameworks */,
 				BAF521631C910033007F9827 /* libicucore.tbd in Frameworks */,
 				BAF521611C910025007F9827 /* libz.tbd in Frameworks */,
 				BAF521541C90FFB7007F9827 /* ShareSDKCoreService.framework in Frameworks */,
@@ -310,6 +313,7 @@
 		0482270F82FB05D43172D2F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BAA9F6321C93C880006F0B0A /* CoreLocation.framework */,
 				BAF521621C910033007F9827 /* libicucore.tbd */,
 				BAF521601C910025007F9827 /* libz.tbd */,
 				BAF520CC1C90FDE5007F9827 /* AGCommon.framework */,

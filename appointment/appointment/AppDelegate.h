@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <ShareSDK/ShareSDK.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate> {
+    CLLocationManager *_locateManager;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

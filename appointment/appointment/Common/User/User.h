@@ -7,8 +7,10 @@
 //
 
 #import "BBQBaseModel.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface User : BBQBaseModel {
+    NSString *_address;
 }
 
 @property (strong, nonatomic, readonly) NSString *token;
@@ -18,6 +20,11 @@
 
 @property (nonatomic, strong) NSArray *dynamicMenuArr;
 @property (nonatomic, strong) NSDictionary *adDic;
+
+@property(strong, nonatomic) CLLocation *myLocation;
+
+- (NSString *)getAddress;
+- (void)uploadLocation;
 
 // Class Methods
 + (User *)sharedInstance;

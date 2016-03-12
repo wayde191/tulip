@@ -45,7 +45,7 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
-    iHDINFO(@"----- ????");
+    [self locateMe];
     return YES;
 }
 
@@ -342,5 +342,43 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     //        [self showTabBar];
     //    }
 }
+
+- (void)locateMe {
+    if (IOS8_OR_LATER) {
+        [_locateManager requestWhenInUseAuthorization];
+    }
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        _locateManager = [[CLLocationManager alloc] init];
+        _locateManager.delegate  = self;
+        _locateManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+        [_locateManager startUpdatingLocation];
+        [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:5.0];
+     } else {
+     }
+}
+
+- (void)stopUpdatingLocation:(NSString *)state {
+    [_locateManager stopUpdatingLocation];
+    _locateManager.delegate = nil;
+    [[User sharedInstance] uploadLocation];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    [User sharedInstance].myLocation = newLocation;
+    [[User sharedInstance] getAddress];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    if ([error code]==kCLErrorDenied) {
+        NSLog(@"访问被拒绝");
+    } else if([error code]==kCLErrorLocationUnknown){
+        NSLog(@"无法获取位置信息");
+    } else {
+        [self stopUpdatingLocation:NSLocalizedString(@"Error", @"Error")];
+    }
+}
+
 
 @end

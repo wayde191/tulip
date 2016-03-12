@@ -63,6 +63,8 @@ static User *singletonInstance = nil;
         _appDelegate = [AppDelegate getSharedAppDelegate];
         [self initRequest];
         
+        self.myLocation = nil;
+        _address = @"";
         _monitor = [iHSingletonCloud getSharedInstanceByClassNameString:@"iHNetworkMonitor"];
         _monitor.hostUrl = HOST_NAME;
         [_monitor startNotifer];
@@ -87,6 +89,46 @@ static User *singletonInstance = nil;
 }
 
 #pragma mark - Public Methods
+- (void)uploadLocation {
+}
+
+- (NSString *)getAddress {
+    
+    if (![_address isEqualToString:@""]) {
+        return _address;
+    }
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:self.myLocation
+                   completionHandler:^(NSArray *placemarks, NSError *error) {
+                       if (error == nil && [placemarks count] > 0){
+                           CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                           NSString *locality = placemark.locality;
+                           NSString *administrativeArea = placemark.administrativeArea;
+                           NSString *subLocality = placemark.subLocality;
+                           
+                           if (locality || administrativeArea || subLocality) {
+                               if (!locality) {
+                                   locality = @"";
+                               }
+                               if (!administrativeArea) {
+                                   administrativeArea = @"";
+                               }
+                               if (!subLocality) {
+                                   subLocality = @"";
+                               }
+                               _address = [NSString stringWithFormat:@"%@%@%@", administrativeArea, locality, subLocality];
+                           }
+                       } else if (error == nil && [placemarks count] == 0){
+                           _address = @"";
+                       } else if (error != nil){
+                           _address = @"";
+                       }
+                   }];
+    
+    return @"";
+}
+
 - (void)doUploadToken {
 //    theRequest.requestMethod = iHRequestMethodPost;
     NSString *token = [USER_DEFAULT objectForKey:IH_DEVICE_TOKEN];
