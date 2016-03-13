@@ -25,6 +25,7 @@ typedef void (^ShareFailsHandler)();
 @property (nonatomic, weak) id shareDelegate;
 
 - (id)initWithImage:(UIImage *)image triggerView:(id)sender;
+- (id)initWithImage:(UIImage *)image triggerView:(id)sender title:(NSString *)title content:(NSString *)content url:(NSString *)url;
 - (void)showShareActionSheet;
 
 + (BOOL)isPreferredChinese;

@@ -9,15 +9,15 @@
 #import "IHShare.h"
 #import "BBQ+ShareSDK.h"
 
-#define D_TITLE                             @"BBQ"
-#define D_CONTENT                           @""
-#define D_SITE_URL                          @"http://www.ihakula.com"
+#define D_TITLE                             @"郁金香挂号"
+#define D_CONTENT                           @"郁金香挂号 内容"
+#define D_SITE_URL                          @"http://www.baidu.com"
 
-#define D_QQSPACE_TITTLE                    @"BBQ"
-#define D_QQ_TITTLE                         @"BBQ"
-#define D_WX_SESSION_TITLE                  @"BBQ"
+#define D_QQSPACE_TITTLE                    @"郁金香挂号"
+#define D_QQ_TITTLE                         @"郁金香挂号"
+#define D_WX_SESSION_TITLE                  @"郁金香挂号"
 
-#define D_PLATFORM                          @"BBQ"
+#define D_PLATFORM                          @"郁金香挂号"
 
 @interface IHShare (){
     id<ISSContent> _publishContent;
@@ -50,6 +50,19 @@
     if (self) {
         self.image = image;
         self.sender = sender;
+        [self build];
+    }
+    return self;
+}
+
+- (id)initWithImage:(UIImage *)image triggerView:(id)sender title:(NSString *)title content:(NSString *)content url:(NSString *)url {
+    self = [self init];
+    if (self) {
+        self.image = image;
+        self.sender = sender;
+        self.title = title;
+        self.content = content;
+        self.siteUrl = url;
         [self build];
     }
     return self;
@@ -91,12 +104,14 @@
     [self setupContainer];
     [self customizeSinaActionSheetItem];
     [self customizeQZoneActionSheetItem];
+    [self customizeWeixinSessionContent];
+    [self customizeWeixinTimelineContent];
     [self initShareList];
 }
 
 - (id<ISSCAttachment>)getImage {
-    NSData *data = UIImageJPEGRepresentation(self.image, 0.5);
-    return [ShareSDK imageWithData:data fileName:@"gopro" mimeType:@"jpeg"];
+    NSData *data = UIImageJPEGRepresentation(self.image, 0.8);
+    return [ShareSDK imageWithData:data fileName:@"tulip" mimeType:@"jpeg"];
 }
 
 - (void)initContent {
@@ -106,7 +121,7 @@
                                   title:self.title
                                     url:self.siteUrl
                             description:self.desc
-                              mediaType:SSPublishContentMediaTypeImage];
+                              mediaType:SSPublishContentMediaTypeNews];
 }
 
 - (void)customizeQQSpaceContent {
@@ -133,11 +148,11 @@
 
 - (void)customizeWeixinSessionContent {
     [_publishContent addWeixinSessionUnitWithType:INHERIT_VALUE
-                                          content:INHERIT_VALUE
-                                            title:D_WX_SESSION_TITLE
-                                              url:INHERIT_VALUE
+                                          content:self.content
+                                            title:self.title
+                                              url:self.siteUrl
                                        thumbImage:[self getImage]
-                                            image:INHERIT_VALUE
+                                            image:[self getImage]
                                      musicFileUrl:nil
                                           extInfo:nil
                                          fileData:nil
@@ -146,8 +161,8 @@
 
 - (void)customizeWeixinTimelineContent {
     [_publishContent addWeixinTimelineUnitWithType:[NSNumber numberWithInteger:SSPublishContentMediaTypeMusic]
-                                           content:INHERIT_VALUE
-                                             title:D_WX_SESSION_TITLE
+                                           content:self.content
+                                             title:self.title
                                                url:self.siteUrl
                                         thumbImage:[self getImage]
                                              image:INHERIT_VALUE

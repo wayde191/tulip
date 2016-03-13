@@ -107,21 +107,7 @@
     viewController.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 }
 
-- (void)showSharePage:(id)sender {
-    IHShare *shareGo = [[IHShare alloc] initWithImage:[self getSharingImage] triggerView:sender];
-    shareGo.shareDelegate = self;
-    
-    shareGo.shareSuccessHandler = ^(void){
-        NSLog(@"Success");
-        
-    };
-    shareGo.sharefailsHandler = ^(void){
-        NSLog(@"Fails");
-    };
-    [shareGo showShareActionSheet];
-}
-
-- (UIImage *)getSharingImage {
+- (UIImage *)getScreenshotImage {
     UIImage *newImg = nil;
     
     [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
@@ -137,6 +123,7 @@
     newImg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
     return newImg;
 }
 
@@ -164,9 +151,9 @@
     } else if ([action isEqualToString:@"dataLoadingClose"]) {
         [self hideMessage];
     } else if ([action isEqualToString:@"screenshot"]) {
-        [self showSharePage:self.webview];
+        [[User sharedInstance] uploadScreenshot:[self getScreenshotImage]];
     } else if ([action isEqualToString:@"socialSharing"]){
-        [self showSharePage:self.webview];
+        [self showSharePage:order];
     } else if ([action isEqualToString:@"getDeviceId"]) {
         [[User sharedInstance] uploadDeviceId];
     } else if ([action isEqualToString:@"getLocation"]) {
@@ -216,6 +203,32 @@
     } else {
         [self.webview stringByEvaluatingJavaScriptFromString:_rightScriptStr];
     }
+}
+
+- (void)showSharePage:(NSArray *)orderArr {
+    NSString *title = [self getReadableString:orderArr[1]];
+    NSString *content = [self getReadableString:orderArr[2]];
+    NSString *imageUrl = orderArr[3];
+    NSString *siteUrl = orderArr[4];
+    
+    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+    UIImage *image = [UIImage imageWithData:imgData];
+
+    IHShare *shareGo = [[IHShare alloc] initWithImage:image triggerView:self.webview title:title content:content url:siteUrl];
+    shareGo.shareDelegate = self;
+    
+    shareGo.shareSuccessHandler = ^(void){
+        NSLog(@"Success");
+        
+    };
+    shareGo.sharefailsHandler = ^(void){
+        NSLog(@"Fails");
+    };
+    [shareGo showShareActionSheet];
+}
+
+- (NSString *)getReadableString:(NSString *)resource {
+    return [resource stringByRemovingPercentEncoding];
 }
 
 @end

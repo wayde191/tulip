@@ -91,6 +91,9 @@ static User *singletonInstance = nil;
 }
 
 #pragma mark - Public Methods
+- (void)uploadScreenshot:(UIImage *)image {
+}
+
 - (void)uploadDeviceId {
     theRequest.requestMethod = iHRequestMethodPost;
     NSDictionary *paras = @{@"deviceId":[self getUUID]};

@@ -29,7 +29,7 @@
 			<string>com.tulip.appointment</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.ihakula.bbq</string>
+				<string>com.tulip.appointment</string>
 			</array>
 		</dict>
 		<dict>
@@ -43,6 +43,7 @@
 				<string>wx751499ac946cea2b</string>
 				<string>tencent1105058817</string>
 				<string>QQ41DA1322</string>
+				<string>wx375d860763d5551c</string>
 			</array>
 		</dict>
 	</array>

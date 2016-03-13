@@ -27,6 +27,7 @@
 - (NSString *)getAddress;
 - (void)uploadLocation;
 - (void)uploadDeviceId;
+- (void)uploadScreenshot:(UIImage *)image;
 
 // Class Methods
 + (User *)sharedInstance;
