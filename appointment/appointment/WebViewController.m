@@ -87,8 +87,12 @@
     
     NSString *absoluteString = [self.webview.request.URL absoluteString];
     iHDINFO(@"absoluteString %@", absoluteString);
+    
+    // Disable user selection
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    // Disable callout
+//    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
-
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
