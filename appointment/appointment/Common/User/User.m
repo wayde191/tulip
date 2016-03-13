@@ -25,7 +25,8 @@
 #define GET_AD_SERVICE              @"GetAdService"
 
 #define UPDATE_SESSION_SERVICE      @"UpdateSessionService"
-#define GET_ALL_FUNDS_SERVICE       @"GetAllFundsService"
+
+#define UPLOAD_LOCATION_SERVICE     @"UploadLocationService"
 #define UPLOAD_TOKEN_SERVICE        @"UploadTokenService"
 
 #define GET_USER_CONTACT_SERVICE    @"GetUserContactService"
@@ -70,6 +71,7 @@ static User *singletonInstance = nil;
         [_monitor startNotifer];
         
         [self setupUserData];
+        [self loginSuccess:@{}];
 
     }
     return self;
@@ -89,7 +91,19 @@ static User *singletonInstance = nil;
 }
 
 #pragma mark - Public Methods
+- (void)uploadDeviceId {
+    theRequest.requestMethod = iHRequestMethodPost;
+    NSDictionary *paras = @{@"deviceId":[self getUUID]};
+    
+    [self doCallService:UPLOAD_TOKEN_SERVICE withParameters:paras andServiceUrl:SERVICE_UPLOAD_TOKEN forDelegate:nil];
+}
+
 - (void)uploadLocation {
+    theRequest.requestMethod = iHRequestMethodPost;
+    NSDictionary *paras = @{@"latitude":[NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude],
+                            @"longitude": [NSString stringWithFormat:@"%f", self.myLocation.coordinate.longitude]};
+    
+    [self doCallService:UPLOAD_LOCATION_SERVICE withParameters:paras andServiceUrl:SERVICE_UPLOAD_LOCATION forDelegate:nil];
 }
 
 - (NSString *)getAddress {
@@ -157,23 +171,21 @@ static User *singletonInstance = nil;
 
 - (void)loginSuccess:(NSDictionary *)uinfo
 {
-    _userEmail = [uinfo objectForKey:@"email"];
-    _userName = [uinfo objectForKey:@"name"];
-    _userId = [uinfo objectForKey:@"id"];
-    _groupId = [uinfo objectForKey:@"group_id"];
+//    _userEmail = [uinfo objectForKey:@"email"];
+//    _userName = [uinfo objectForKey:@"name"];
+//    _userId = [uinfo objectForKey:@"id"];
+//    _groupId = [uinfo objectForKey:@"group_id"];
+//    
+//    [_cachedData setObject:_userEmail forKey:IF_USER_EMAIL];
+//    [_cachedData setObject:_userName forKey:IF_USER_NAME];
+//    [_cachedData setObject:_userId forKey:IF_USER_ID];
+//    [_cachedData setObject:_groupId forKey:IF_GROUP_ID];
+//    
+//    [self syncCachedData];
     
-    [_cachedData setObject:_userEmail forKey:IF_USER_EMAIL];
-    [_cachedData setObject:_userName forKey:IF_USER_NAME];
-    [_cachedData setObject:_userId forKey:IF_USER_ID];
-    [_cachedData setObject:_groupId forKey:IF_GROUP_ID];
-    
-    [self syncCachedData];
-    
-    [APService setAlias:_userEmail
+    [APService setAlias:[self getUUID]
        callbackSelector:@selector(tagsAliasCallback:tags:alias:)
                  object:self];
-    
-    
 }
 
 - (void)tagsAliasCallback:(int)iResCode

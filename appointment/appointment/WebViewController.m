@@ -168,8 +168,9 @@
     } else if ([action isEqualToString:@"socialSharing"]){
         [self showSharePage:self.webview];
     } else if ([action isEqualToString:@"getDeviceId"]) {
-        
+        [[User sharedInstance] uploadDeviceId];
     } else if ([action isEqualToString:@"getLocation"]) {
+        [[User sharedInstance] uploadLocation];
     }
 }
 

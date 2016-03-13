@@ -26,6 +26,7 @@
 - (NSString *)getUUID;
 - (NSString *)getAddress;
 - (void)uploadLocation;
+- (void)uploadDeviceId;
 
 // Class Methods
 + (User *)sharedInstance;

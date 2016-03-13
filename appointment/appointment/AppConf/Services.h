@@ -34,5 +34,6 @@
 
 #define SERVICE_LOGIN                               @"login"
 #define SERVICE_UPLOAD_TOKEN                        @"upload_token"
+#define SERVICE_UPLOAD_LOCATION                     @"upload_location"
 
 #endif
