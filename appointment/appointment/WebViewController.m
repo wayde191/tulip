@@ -111,37 +111,6 @@
     viewController.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 }
 
-- (UIImage *)getScreenshotImage {
-    UIImage *newImg = nil;
-    
-    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
-    CGFloat posterHeight = self.webview.scrollView.contentSize.height + 30.0f;
-    UIImage *img1 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:FIRST_SCREEN_HEIGHT];
-    
-    [self.webview.scrollView setContentOffset:CGPointMake(0, FIRST_SCREEN_HEIGHT)];
-    UIImage *img2 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:posterHeight];
-    
-    UIGraphicsBeginImageContext(CGSizeMake(IH_DEVICE_WIDTH, posterHeight));
-    [img2 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, posterHeight)];
-    [img1 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, FIRST_SCREEN_HEIGHT)];
-    newImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
-    return newImg;
-}
-
-- (UIImage *)takeScreenShotFromView:(UIView *)scrollview
-                          withWidth:(float)width
-                          andHeight:(float)height
-{
-    UIGraphicsBeginImageContext(CGSizeMake(width, height));
-    [scrollview.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-}
-
 #pragma mark - Dispatch HTML event
 - (void)dispatch:(NSArray *)order {
     NSString *action = order[0];
@@ -152,16 +121,26 @@
     } else if ([action isEqualToString:@"dataLoadingOpen"]) {
         [self hideMessage];
         [self showMessage:@"加载中..."];
+        
     } else if ([action isEqualToString:@"dataLoadingClose"]) {
         [self hideMessage];
+        
     } else if ([action isEqualToString:@"screenshot"]) {
-        [[User sharedInstance] uploadScreenshot:[self getScreenshotImage]];
+        [self saveImageToAlbum];
+        
     } else if ([action isEqualToString:@"socialSharing"]){
         [self showSharePage:order];
+        
     } else if ([action isEqualToString:@"getDeviceId"]) {
-        [[User sharedInstance] uploadDeviceId];
+        NSString *deviceScript = [NSString stringWithFormat:@"window.cb.deviceId(%@)",
+                                  [[User sharedInstance] getUUID]];
+        [self.webview stringByEvaluatingJavaScriptFromString:deviceScript];
+        
     } else if ([action isEqualToString:@"getLocation"]) {
-        [[User sharedInstance] uploadLocation];
+        NSString *locationScript = [NSString stringWithFormat:@"window.cb.location(%@, %@)",
+                                    [[User sharedInstance] getLongitudeStr],
+                                    [[User sharedInstance] getLatitudeStr]];
+        [self.webview stringByEvaluatingJavaScriptFromString:locationScript];
     }
 }
 
@@ -233,6 +212,49 @@
 
 - (NSString *)getReadableString:(NSString *)resource {
     return [resource stringByRemovingPercentEncoding];
+}
+
+- (void)saveImageToAlbum{
+    UIImageWriteToSavedPhotosAlbum([self getScreenshotImage], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    if (error == nil) {
+        [self showDoneMessage:@"截图保存成功"];
+    }else{
+        [self showErrorMessage:@"截图保存失败"];
+    }
+}
+
+- (UIImage *)getScreenshotImage {
+    UIImage *newImg = nil;
+    
+    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    CGFloat posterHeight = self.webview.scrollView.contentSize.height + 30.0f;
+    UIImage *img1 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:FIRST_SCREEN_HEIGHT];
+    
+    [self.webview.scrollView setContentOffset:CGPointMake(0, FIRST_SCREEN_HEIGHT)];
+    UIImage *img2 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:posterHeight];
+    
+    UIGraphicsBeginImageContext(CGSizeMake(IH_DEVICE_WIDTH, posterHeight));
+    [img2 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, posterHeight)];
+    [img1 drawInRect:CGRectMake(0, 0, IH_DEVICE_WIDTH, FIRST_SCREEN_HEIGHT)];
+    newImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    return newImg;
+}
+
+- (UIImage *)takeScreenShotFromView:(UIView *)scrollview
+                          withWidth:(float)width
+                          andHeight:(float)height
+{
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    [scrollview.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
 }
 
 @end

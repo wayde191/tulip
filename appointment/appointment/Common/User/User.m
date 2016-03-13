@@ -101,6 +101,14 @@ static User *singletonInstance = nil;
     [self doCallService:UPLOAD_TOKEN_SERVICE withParameters:paras andServiceUrl:SERVICE_UPLOAD_TOKEN forDelegate:nil];
 }
 
+- (NSString *)getLongitudeStr {
+    return [NSString stringWithFormat:@"%f", self.myLocation.coordinate.longitude];
+}
+
+- (NSString *)getLatitudeStr {
+    return [NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude];
+}
+
 - (void)uploadLocation {
     theRequest.requestMethod = iHRequestMethodPost;
     NSDictionary *paras = @{@"latitude":[NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude],

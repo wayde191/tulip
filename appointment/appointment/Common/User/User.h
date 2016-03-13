@@ -24,6 +24,8 @@
 @property(strong, nonatomic) CLLocation *myLocation;
 
 - (NSString *)getUUID;
+- (NSString *)getLongitudeStr;
+- (NSString *)getLatitudeStr;
 - (NSString *)getAddress;
 - (void)uploadLocation;
 - (void)uploadDeviceId;
