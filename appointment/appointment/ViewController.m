@@ -57,18 +57,18 @@
 }
 
 - (IBAction)allOptionsButtonClicked:(id)sender {
-    [self gotoWebViewController];
     _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    [self gotoWebViewController];
 }
 
 - (IBAction)onlyHospitalButtonClicked:(id)sender {
-    [self gotoWebViewController];
     _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    [self gotoWebViewController];
 }
 
 - (IBAction)onlyDoctorButtonClicked:(id)sender {
-    [self gotoWebViewController];
     _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    [self gotoWebViewController];
 }
 
 - (IBAction)onMenuButtonClicked:(id)sender {
