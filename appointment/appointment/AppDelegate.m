@@ -54,11 +54,11 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-//    [self showTodoView];
+    [self clearNotification];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-//    [self showTodoView];
+    [self clearNotification];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {}

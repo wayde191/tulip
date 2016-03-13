@@ -10,7 +10,9 @@
 #import "WebViewController.h"
 #import "IHShare.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    NSString *_selectedUrl;
+}
 
 @end
 
@@ -41,24 +43,32 @@
 #pragma mark - Public Method
 - (void)adClicked:(NSString *)url {
     [appDelegate hideAdView];
+    _selectedUrl = url;
+    [self gotoWebViewController];
     iHDINFO(@"--- %@", url);
 }
 
 - (void)menuRowClicked:(NSDictionary *)data {
     [appDelegate hideMenu];
+    _selectedUrl = data[@"url"];
+    [self gotoWebViewController];
     iHDINFO(@"--- %@", data);
+    
 }
 
 - (IBAction)allOptionsButtonClicked:(id)sender {
     [self gotoWebViewController];
+    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
 }
 
 - (IBAction)onlyHospitalButtonClicked:(id)sender {
     [self gotoWebViewController];
+    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
 }
 
 - (IBAction)onlyDoctorButtonClicked:(id)sender {
     [self gotoWebViewController];
+    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
 }
 
 - (IBAction)onMenuButtonClicked:(id)sender {
@@ -74,7 +84,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     id vc = segue.destinationViewController;
     if ([vc isKindOfClass:[WebViewController class]]) {
-        [(WebViewController *)vc setUrlString:@"http://sandbox.api.sibosen.com/test.html"];
+        [(WebViewController *)vc setUrlString:_selectedUrl];
     }
 }
 
