@@ -306,16 +306,14 @@
         [weakself hideIssueView];
         [weakself loadCurrentUrl];
     };
-    [self.view addSubview:_issueView];
-    [self hideIssueView];
 }
 
 - (void)hideIssueView {
-    [self.view sendSubviewToBack:_issueView];
+    [_issueView removeFromSuperview];
 }
 
 - (void)showIssueView {
-    [self.view bringSubviewToFront:_issueView];
+    [self.view addSubview:_issueView];
 }
 
 - (void)loadCurrentUrl {

@@ -147,7 +147,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 
 #pragma mark - Chinese ShareSDK
 - (void)initChineseShareSDK {
-    [ShareSDK registerApp:@"9907c00a69e8"];  //如果需要看下广告效果，可以把Appkey换成"737dfd5147db"
+    [ShareSDK registerApp:@"105dc3fb46d34"];  //如果需要看下广告效果，可以把Appkey换成"737dfd5147db"
     _interfaceOrientationMask = SSInterfaceOrientationMaskAll;
     
     //设置屏幕方向,默认是所有方向(optional)
