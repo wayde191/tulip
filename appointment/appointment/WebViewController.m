@@ -31,8 +31,11 @@
     _trustedHosts = [[NSMutableArray alloc] init];
     
     self.title = @"就诊城市";
-    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    [self setLeftGobackButton];
     
+    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    self.webview.scrollView.bounces = NO;
+    self.webview.scrollView.showsHorizontalScrollIndicator = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,8 +55,10 @@
     
     if ([[[request URL] scheme] isEqualToString:TULIP_PROTOCOL]) {
         NSString *url = [NSString stringWithFormat:@"%@", [request URL]];
+        iHDINFO(@"%@", url);
         NSString *infoStr = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:", TULIP_PROTOCOL] withString:@""];
         NSArray *infoArr = [infoStr componentsSeparatedByString:SEPARATED_SIGNAL];
+        iHDINFO(@"%@", infoArr);
         [self dispatch:infoArr];
         
         return NO;
@@ -84,6 +89,13 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [self hideMessage];
+    
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    if ([[self.webview.request.URL scheme] isEqualToString:@"https"]
+        || [[self.webview.request.URL scheme] isEqualToString:@"http"]) {
+        [self restoreNavigationButtons];
+    }
     
     NSString *absoluteString = [self.webview.request.URL absoluteString];
     iHDINFO(@"absoluteString %@", absoluteString);
@@ -132,15 +144,20 @@
         [self showSharePage:order];
         
     } else if ([action isEqualToString:@"getDeviceId"]) {
-        NSString *deviceScript = [NSString stringWithFormat:@"window.cb.deviceId(%@)",
+        NSString *deviceScript = [NSString stringWithFormat:@"window.cb.deviceId('%@')",
                                   [[User sharedInstance] getUUID]];
+        iHDINFO(@"%@", deviceScript);
         [self.webview stringByEvaluatingJavaScriptFromString:deviceScript];
         
     } else if ([action isEqualToString:@"getLocation"]) {
-        NSString *locationScript = [NSString stringWithFormat:@"window.cb.location(%@, %@)",
+        NSString *locationScript = [NSString stringWithFormat:@"window.cb.location('%@', '%@')",
                                     [[User sharedInstance] getLongitudeStr],
                                     [[User sharedInstance] getLatitudeStr]];
+        iHDINFO(@"%@", locationScript);
         [self.webview stringByEvaluatingJavaScriptFromString:locationScript];
+        
+    } else if ([action isEqualToString:@"backToHome"]) {
+        [self setLeftGobackButton];
     }
 }
 
@@ -228,11 +245,11 @@
 
 - (UIImage *)getScreenshotImage {
     UIImage *newImg = nil;
+    CGFloat oldOffsetY = self.webview.scrollView.contentOffset.y;
     
     [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
     CGFloat posterHeight = self.webview.scrollView.contentSize.height + 30.0f;
     UIImage *img1 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:FIRST_SCREEN_HEIGHT];
-    
     [self.webview.scrollView setContentOffset:CGPointMake(0, FIRST_SCREEN_HEIGHT)];
     UIImage *img2 = [self takeScreenShotFromView:self.webview.scrollView withWidth:IH_DEVICE_WIDTH andHeight:posterHeight];
     
@@ -242,7 +259,7 @@
     newImg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    [self.webview.scrollView setContentOffset:CGPointMake(0, 0)];
+    [self.webview.scrollView setContentOffset:CGPointMake(0, oldOffsetY)];
     return newImg;
 }
 
@@ -255,6 +272,23 @@
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;
+}
+
+- (void)setLeftGobackButton {
+    NavButton *navButton = [NavButton viewFromNib];
+    [navButton makeAsLeftNavigationButton];
+    navButton.backLabel.text = @"返回";
+    [navButton.button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navButton];
+}
+
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)restoreNavigationButtons {
+    [self setLeftGobackButton];
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 @end

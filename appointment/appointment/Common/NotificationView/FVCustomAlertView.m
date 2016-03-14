@@ -103,6 +103,11 @@ static const CGFloat kOtherIconsSize = 30;
     content.frame = CGRectApplyAffineTransform(content.frame, CGAffineTransformMakeTranslation(width/2 - content.frame.size.width/2, titleLabel.frame.origin.y + titleLabel.frame.size.height + kInsetValue));
 
     [alertView addSubview:content];
+    
+    // Switch label and content position;
+    CGFloat originTop = titleLabel.top;
+    content.top = originTop;
+    titleLabel.top = content.top + content.height + kInsetValue;
 
     [resultView addSubview:alertView];
 
@@ -110,7 +115,7 @@ static const CGFloat kOtherIconsSize = 30;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:[FVCustomAlertView class] action:@selector(hideAlertByTap:)];
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.numberOfTouchesRequired = 1;
-    [resultView addGestureRecognizer:tapGesture];
+//    [resultView addGestureRecognizer:tapGesture];
 
     [view addSubview:resultView];
 }
