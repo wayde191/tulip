@@ -14,19 +14,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYy-n5-H4S" userLabel="EmptyView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="EJb-f7-oxs">
-                            <rect key="frame" x="98" y="87" width="125" height="125"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="125" id="MRf-6c-Fzf"/>
-                                <constraint firstAttribute="width" constant="125" id="meh-9P-8MK"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网络异常" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="So4-Mx-rgl">
-                            <rect key="frame" x="0.0" y="212" width="320" height="56"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载失败，请点击重试" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="So4-Mx-rgl">
+                            <rect key="frame" x="0.0" y="204" width="320" height="72"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="320" id="8aG-TV-GCy"/>
-                                <constraint firstAttribute="height" constant="56" id="eWJ-xh-EuG"/>
+                                <constraint firstAttribute="height" constant="72" id="bek-ur-go8"/>
+                                <constraint firstAttribute="width" constant="320" id="k4u-gs-Q2b"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,25 +27,20 @@
                             <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <size key="shadowOffset" width="1" height="1"/>
                         </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-GY-scg">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLs-Jw-drL">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
                             <connections>
-                                <action selector="onSecondBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Qhb-I4-vvv"/>
+                                <action selector="onSecondBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="yVP-HH-NPh"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="centerX" secondItem="So4-Mx-rgl" secondAttribute="centerX" id="Big-Hl-3IK"/>
-                        <constraint firstAttribute="centerX" secondItem="EJb-f7-oxs" secondAttribute="centerX" constant="-0.5" id="O9g-Ne-mMV"/>
-                        <constraint firstItem="tuO-GY-scg" firstAttribute="top" secondItem="VYy-n5-H4S" secondAttribute="top" id="QPo-Hy-TIm"/>
-                        <constraint firstAttribute="bottom" secondItem="tuO-GY-scg" secondAttribute="bottom" id="V4Q-73-Z9o"/>
-                        <constraint firstItem="tuO-GY-scg" firstAttribute="leading" secondItem="VYy-n5-H4S" secondAttribute="leading" id="X5o-hh-H4K"/>
-                        <constraint firstAttribute="centerY" secondItem="So4-Mx-rgl" secondAttribute="centerY" id="ZgL-Ay-IlK"/>
-                        <constraint firstAttribute="trailing" secondItem="tuO-GY-scg" secondAttribute="trailing" id="jSG-IY-zBy"/>
-                        <constraint firstAttribute="centerY" secondItem="EJb-f7-oxs" secondAttribute="centerY" constant="90.5" id="zqV-Na-svF"/>
+                        <constraint firstItem="HLs-Jw-drL" firstAttribute="top" secondItem="VYy-n5-H4S" secondAttribute="top" id="0dz-Wb-lTu"/>
+                        <constraint firstAttribute="bottom" secondItem="HLs-Jw-drL" secondAttribute="bottom" id="7ln-98-i7r"/>
+                        <constraint firstItem="HLs-Jw-drL" firstAttribute="leading" secondItem="VYy-n5-H4S" secondAttribute="leading" id="MiI-9L-nYr"/>
+                        <constraint firstAttribute="trailing" secondItem="HLs-Jw-drL" secondAttribute="trailing" id="gfO-cf-aW5"/>
+                        <constraint firstItem="So4-Mx-rgl" firstAttribute="centerY" secondItem="VYy-n5-H4S" secondAttribute="centerY" id="lOb-zg-MGU"/>
+                        <constraint firstItem="So4-Mx-rgl" firstAttribute="centerX" secondItem="VYy-n5-H4S" secondAttribute="centerX" id="sA4-rQ-9d2"/>
                     </constraints>
                 </view>
             </subviews>
@@ -67,10 +55,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="264" y="236"/>
+            <point key="canvasLocation" x="313" y="50"/>
         </view>
     </objects>
-    <resources>
-        <image name="empty.png" width="250" height="250"/>
-    </resources>
 </document>

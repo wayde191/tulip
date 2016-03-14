@@ -9,6 +9,7 @@
 #import "WebViewController.h"
 #import "IHShare.h"
 #import "NavButton.h"
+#import "NetworkIssueView.h"
 
 #define SEPARATED_SIGNAL @"00110011"
 #define TULIP_PROTOCOL   @"tulip"
@@ -21,6 +22,7 @@
     NSString *_rightUrl;
     NSString *_rightScriptStr;
 }
+@property (nonatomic, strong) NetworkIssueView *issueView;
 
 @end
 
@@ -33,9 +35,11 @@
     self.title = @"就诊城市";
     [self setLeftGobackButton];
     
-    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+    [self loadCurrentUrl];
     self.webview.scrollView.bounces = NO;
     self.webview.scrollView.showsHorizontalScrollIndicator = NO;
+    
+    [self setupIssueView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,6 +93,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [self hideMessage];
+    self.urlString = [self.webview.request.URL absoluteString];
     
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
@@ -96,9 +101,6 @@
         || [[self.webview.request.URL scheme] isEqualToString:@"http"]) {
         [self restoreNavigationButtons];
     }
-    
-    NSString *absoluteString = [self.webview.request.URL absoluteString];
-    iHDINFO(@"absoluteString %@", absoluteString);
     
     // Disable user selection
     [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
@@ -108,6 +110,8 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    [self showIssueView];
+    
     iHDINFO(@"webview failed! Error %@ - %@ - %@", error, [error userInfo], [error localizedDescription]);
     [self hideMessage];
 }
@@ -289,6 +293,34 @@
 - (void)restoreNavigationButtons {
     [self setLeftGobackButton];
     self.navigationItem.rightBarButtonItem = nil;
+}
+
+#pragma mark - Private View
+- (void)setupIssueView {
+    self.issueView = [NetworkIssueView viewFromNib];
+    _issueView.width = IH_DEVICE_WIDTH;
+    _issueView.height = IH_DEVICE_HEIGHT;
+    
+    WebViewController __weak *weakself = self;
+    _issueView.vchangedBlock = ^(NetworkIssueView *keyboard){
+        [weakself hideIssueView];
+        [weakself loadCurrentUrl];
+    };
+    [self.view addSubview:_issueView];
+    [self hideIssueView];
+}
+
+- (void)hideIssueView {
+    [self.view sendSubviewToBack:_issueView];
+}
+
+- (void)showIssueView {
+    [self.view bringSubviewToFront:_issueView];
+}
+
+- (void)loadCurrentUrl {
+    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
+
 }
 
 @end
