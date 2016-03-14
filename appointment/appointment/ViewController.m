@@ -10,6 +10,16 @@
 #import "WebViewController.h"
 #import "IHShare.h"
 
+//1 靠谱的医生－ http://tulip.sibosen.com/inquiry/step1.html
+//2 指定医院－ http://tulip.sibosen.com/search/city.html
+//3 指定医生－ http://tulip.sibosen.com/search/doctor.html
+
+#define HOME_URL_1      @"http://tulip.sibosen.com/inquiry/step1.html"
+#define HOME_URL_2      @"http://tulip.sibosen.com/search/city.html"
+#define HOME_URL_3      @"http://tulip.sibosen.com/search/doctor.html"
+
+#define HOME_TEST_URL   @"http://sandbox.api.sibosen.com/test.html"
+
 @interface ViewController (){
     NSString *_selectedUrl;
 }
@@ -53,21 +63,27 @@
     _selectedUrl = data[@"url"];
     [self gotoWebViewController];
     iHDINFO(@"--- %@", data);
-    
+}
+
+- (void)notificationReveived:(NSString *)url {
+    if (url) {
+        _selectedUrl = url;
+        [self gotoWebViewController];
+    }
 }
 
 - (IBAction)allOptionsButtonClicked:(id)sender {
-    _selectedUrl = @"http://tulip.sibosen.com/inquiry/step1.html";
+    _selectedUrl = HOME_URL_1;
     [self gotoWebViewController];
 }
 
 - (IBAction)onlyHospitalButtonClicked:(id)sender {
-    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    _selectedUrl = HOME_URL_2;
     [self gotoWebViewController];
 }
 
 - (IBAction)onlyDoctorButtonClicked:(id)sender {
-    _selectedUrl = @"http://tulip.sibosen.com/search/doctor.html";
+    _selectedUrl = HOME_URL_3;
     [self gotoWebViewController];
 }
 

@@ -12,6 +12,7 @@
 
 - (void)adClicked:(NSString *)url;
 - (void)menuRowClicked:(NSDictionary *)data;
+- (void)notificationReveived:(NSString *)url;
 - (IBAction)allOptionsButtonClicked:(id)sender;
 - (IBAction)onlyHospitalButtonClicked:(id)sender;
 - (IBAction)onlyDoctorButtonClicked:(id)sender;

@@ -92,9 +92,16 @@ forRemoteNotification:(NSDictionary *)userInfo
 }
 #endif
 
+- (void)handleNotification:(NSDictionary *)notification {
+    ViewController *vc = [self getRootViewController];
+    NSString *url = notification[@"aps"][@"url"];
+    [vc notificationReveived:url];
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [APService handleRemoteNotification:userInfo];
     iHDINFO(@"收到通知1:%@", userInfo);
+    [self handleNotification:userInfo];
 //    [self showTodoView];
     
     [iHPubSub publishMsgWithSubject:NH_REMOTE_NOTIFICATION_RECEIVED andDataDic:@{@"action":NH_REMOTE_NOTIFICATION_RECEIVED, @"data":userInfo}];
@@ -105,6 +112,7 @@ fetchCompletionHandler:
 (void (^)(UIBackgroundFetchResult))completionHandler {
     [APService handleRemoteNotification:userInfo];
     iHDINFO(@"收到通知2:%@", userInfo);
+    [self handleNotification:userInfo];
 //    [self showTodoView];
     
     [iHPubSub publishMsgWithSubject:NH_REMOTE_NOTIFICATION_RECEIVED andDataDic:@{@"action":NH_REMOTE_NOTIFICATION_RECEIVED, @"data":userInfo}];
