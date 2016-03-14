@@ -343,24 +343,24 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)locateMe {
+    _locateManager = [[CLLocationManager alloc] init];
+    _locateManager.delegate  = self;
+    _locateManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     if (IOS8_OR_LATER) {
         [_locateManager requestWhenInUseAuthorization];
     }
     
     if ([CLLocationManager locationServicesEnabled]) {
-        _locateManager = [[CLLocationManager alloc] init];
-        _locateManager.delegate  = self;
-        _locateManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         [_locateManager startUpdatingLocation];
         [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:5.0];
-     } else {
-     }
+    } else {
+    }
 }
 
 - (void)stopUpdatingLocation:(NSString *)state {
     [_locateManager stopUpdatingLocation];
     _locateManager.delegate = nil;
-    [[User sharedInstance] uploadLocation];
+//    [[User sharedInstance] uploadLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate

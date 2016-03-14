@@ -30,7 +30,8 @@
 
 #define SERVICE_GET_MENU                            @"v2/settings/menu"
 #define SERVICE_GET_WELCOME_NO_AD                   @"v2/settings/ad1"
-#define SERVICE_GET_WELCOME_AD                      @"v2/settings/ad2"
+#define SERVICE_GET_WELCOME_WITH_AD                 @"v2/settings/ad2"
+#define SERVICE_GET_WELCOME_AD                      @"v2/settings/ad"
 
 #define SERVICE_LOGIN                               @"login"
 #define SERVICE_UPLOAD_TOKEN                        @"upload_token"

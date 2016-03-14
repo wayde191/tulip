@@ -57,7 +57,7 @@
 }
 
 - (IBAction)allOptionsButtonClicked:(id)sender {
-    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    _selectedUrl = @"http://tulip.sibosen.com/inquiry/step1.html";
     [self gotoWebViewController];
 }
 
@@ -67,7 +67,7 @@
 }
 
 - (IBAction)onlyDoctorButtonClicked:(id)sender {
-    _selectedUrl = @"http://sandbox.api.sibosen.com/test.html";
+    _selectedUrl = @"http://tulip.sibosen.com/search/doctor.html";
     [self gotoWebViewController];
 }
 
