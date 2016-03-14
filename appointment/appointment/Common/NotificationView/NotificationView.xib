@@ -13,7 +13,21 @@
             <subviews>
                 <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-WI-aqk">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nG6-9d-COI">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <connections>
+                                <action selector="onBackgroundClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="9qm-d3-CeZ"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="nG6-9d-COI" firstAttribute="leading" secondItem="B1c-WI-aqk" secondAttribute="leading" id="OrT-1k-kWL"/>
+                        <constraint firstAttribute="trailing" secondItem="nG6-9d-COI" secondAttribute="trailing" id="R9G-u8-trj"/>
+                        <constraint firstAttribute="bottom" secondItem="nG6-9d-COI" secondAttribute="bottom" id="jD4-l0-PaI"/>
+                        <constraint firstItem="nG6-9d-COI" firstAttribute="top" secondItem="B1c-WI-aqk" secondAttribute="top" id="zr2-Cg-lPu"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tee-eV-7fp">
                     <rect key="frame" x="0.0" y="0.0" width="288" height="667"/>
@@ -28,18 +42,42 @@
                                         <constraint firstAttribute="height" constant="87" id="jum-Ez-1z5"/>
                                     </constraints>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUZ-DD-myb">
+                                    <rect key="frame" x="0.0" y="0.0" width="288" height="128"/>
+                                    <connections>
+                                        <action selector="onBackgroundClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="OcQ-fA-Zbe"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.9882352941176471" green="0.29803921568627451" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="EqQ-TC-Jh0" firstAttribute="centerY" secondItem="PEh-GH-gcO" secondAttribute="centerY" id="786-CL-rIv"/>
                                 <constraint firstAttribute="height" constant="128" id="DGv-Ls-q2F"/>
                                 <constraint firstItem="EqQ-TC-Jh0" firstAttribute="leading" secondItem="PEh-GH-gcO" secondAttribute="leading" constant="8" id="FpB-4w-7Wk"/>
+                                <constraint firstItem="aUZ-DD-myb" firstAttribute="top" secondItem="PEh-GH-gcO" secondAttribute="top" id="OEF-pB-1om"/>
+                                <constraint firstAttribute="trailing" secondItem="aUZ-DD-myb" secondAttribute="trailing" id="R74-Mo-aeU"/>
+                                <constraint firstAttribute="bottom" secondItem="aUZ-DD-myb" secondAttribute="bottom" id="VHO-qN-Nt4"/>
                                 <constraint firstItem="EqQ-TC-Jh0" firstAttribute="top" secondItem="PEh-GH-gcO" secondAttribute="top" constant="20" id="eDb-hH-eaR"/>
+                                <constraint firstItem="aUZ-DD-myb" firstAttribute="leading" secondItem="PEh-GH-gcO" secondAttribute="leading" id="rgb-cC-Fkf"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZvH-TD-xC9">
                             <rect key="frame" x="0.0" y="128" width="288" height="539"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7u-c4-Q5Z">
+                                    <rect key="frame" x="0.0" y="0.0" width="288" height="539"/>
+                                    <connections>
+                                        <action selector="onBackgroundClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="11I-hy-5P7"/>
+                                    </connections>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" red="0.90980392156862744" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="j7u-c4-Q5Z" secondAttribute="bottom" id="5q2-Bm-a66"/>
+                                <constraint firstItem="j7u-c4-Q5Z" firstAttribute="leading" secondItem="ZvH-TD-xC9" secondAttribute="leading" id="APd-Gc-Btv"/>
+                                <constraint firstAttribute="trailing" secondItem="j7u-c4-Q5Z" secondAttribute="trailing" id="WgH-T4-78L"/>
+                                <constraint firstItem="j7u-c4-Q5Z" firstAttribute="top" secondItem="ZvH-TD-xC9" secondAttribute="top" id="tRk-nU-me4"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,6 +108,7 @@
             <connections>
                 <outlet property="menuContainer" destination="ZvH-TD-xC9" id="ygC-iZ-JsA"/>
             </connections>
+            <point key="canvasLocation" x="161.5" y="406.5"/>
         </view>
     </objects>
     <resources>

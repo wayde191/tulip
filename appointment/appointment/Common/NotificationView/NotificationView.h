@@ -19,5 +19,6 @@ typedef void (^menuClickedBlock)(NSDictionary *data);
 - (void)showMenu;
 - (void)hideMenu;
 
+- (IBAction)onBackgroundClicked:(id)sender;
 - (void)setupMenu:(NSArray *)data;
 @end

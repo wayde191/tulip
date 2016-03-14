@@ -70,6 +70,10 @@
     }];
 }
 
+- (IBAction)onBackgroundClicked:(id)sender {
+    [self hideMenu];
+}
+
 //- (void)showMsg:(NSString *)msg {
 //    _errLabel.text = msg;
 //    [UIView cancelPreviousPerformRequestsWithTarget:self];
