@@ -42,12 +42,13 @@
     self.menuDataArr = data;
     [_menuContainer removeAllSubviews];
     
+    CGFloat defaultTop = 10.0f;
     NotificationView __weak *weakself = self;
     for (int i = 0; i < _menuDataArr.count; i++) {
         MenuRowView *row = [MenuRowView viewFromNib];
         row.width = _menuContainer.width;
         row.left = 0;
-        row.top = i * row.height;
+        row.top = defaultTop + i * row.height;
         
         row.menuClickedBlock = ^(NSDictionary *data){
             [weakself menuClicked:data];
@@ -58,15 +59,23 @@
 }
 
 - (void)showMenu {
+    self.left = 0;
+    self.blackView.left = 0;
+    self.blackView.alpha = 0.7;
+    self.menuMainView.left = -1 * IH_DEVICE_WIDTH;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.left = 0;
+        self.menuMainView.left = 0;
+    } completion:^(BOOL finished) {
     }];
 }
 
 - (void)hideMenu {
+    
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.left = -1 * IH_DEVICE_WIDTH;
+        self.menuMainView.left = -1 * IH_DEVICE_WIDTH;
+        self.blackView.alpha = 0;
     } completion:^(BOOL finished) {
+        self.left = -1 * IH_DEVICE_WIDTH;
     }];
 }
 

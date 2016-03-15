@@ -15,6 +15,8 @@ typedef void (^menuClickedBlock)(NSDictionary *data);
 
 @property (strong, nonatomic) NSArray *menuDataArr;
 @property (weak, nonatomic) IBOutlet UIView *menuContainer;
+@property (weak, nonatomic) IBOutlet UIView *blackView;
+@property (weak, nonatomic) IBOutlet UIView *menuMainView;
 
 - (void)showMenu;
 - (void)hideMenu;
