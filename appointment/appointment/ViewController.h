@@ -18,5 +18,11 @@
 - (IBAction)onlyDoctorButtonClicked:(id)sender;
 
 - (IBAction)onMenuButtonClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thirdTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstTop1Constraint;
+
 @end
 

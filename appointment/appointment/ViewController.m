@@ -32,6 +32,7 @@
     [super viewDidLoad];
     [appDelegate showAdView];
     
+    [self setupConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,6 +102,37 @@
     id vc = segue.destinationViewController;
     if ([vc isKindOfClass:[WebViewController class]]) {
         [(WebViewController *)vc setUrlString:_selectedUrl];
+    }
+}
+
+#pragma mark - Private Methods
+- (void)setupConstraint {
+    CGFloat topTitleViewHeight = 47.0f;
+    CGFloat viewHeight = 159.0f;
+    
+    iHDINFO(@"%@", self.view);
+    
+    if (IS_IPHONE_6) {
+        self.firstTopConstraint.constant += 10.0f;
+        self.firstTop1Constraint.constant += 18.0f;
+
+        CGFloat avaliableSpaceHeight = self.view.height - topTitleViewHeight - self.firstTop1Constraint.constant - viewHeight;
+        CGFloat avarageSpaceHeight = (avaliableSpaceHeight - 2 * viewHeight) / 2 - 9.0f;
+        iHDINFO("%f", avarageSpaceHeight);
+        
+        self.secondTopConstraint.constant = avarageSpaceHeight;
+        self.thirdTopConstraint.constant = avarageSpaceHeight;
+        
+    } else if (IS_IPHONE_6_PLUS) {
+        self.firstTopConstraint.constant += 10.0f;
+        self.firstTop1Constraint.constant += 18.0f;
+        
+        CGFloat avaliableSpaceHeight = self.view.height - topTitleViewHeight - self.firstTop1Constraint.constant - viewHeight;
+        CGFloat avarageSpaceHeight = (avaliableSpaceHeight - 2 * viewHeight) / 2 - 29.0f;
+        iHDINFO("%f", avarageSpaceHeight);
+        
+        self.secondTopConstraint.constant = avarageSpaceHeight;
+        self.thirdTopConstraint.constant = avarageSpaceHeight;
     }
 }
 

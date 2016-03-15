@@ -45,7 +45,7 @@
                                     <constraint firstItem="5xW-q6-XW2" firstAttribute="top" secondItem="uP5-11-AiW" secondAttribute="top" constant="10" id="wC8-qu-qbc"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对于就诊的医院和医生，我希望：" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7g-U4-ii2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对于就诊的医院和医生，我希望:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7g-U4-ii2">
                                 <rect key="frame" x="58" y="95" width="258" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Zto-AR-PM3"/>
@@ -95,7 +95,7 @@
                                                     <constraint firstAttribute="height" constant="14" id="LnD-Hw-Hrr"/>
                                                     <constraint firstAttribute="width" constant="42" id="Yf6-Xz-t73"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.63529411759999999" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -187,7 +187,7 @@
                                                     <constraint firstAttribute="height" constant="14" id="9hK-bq-xW4"/>
                                                     <constraint firstAttribute="width" constant="42" id="icI-jt-xJO"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.63529411759999999" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -313,6 +313,10 @@
                     <navigationItem key="navigationItem" id="q5a-Ly-6Tn"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="firstTop1Constraint" destination="Bsk-HY-2nd" id="M6s-To-Yu3"/>
+                        <outlet property="firstTopConstraint" destination="HOw-wq-08P" id="typ-BF-6JQ"/>
+                        <outlet property="secondTopConstraint" destination="aYM-5a-PgI" id="1T3-cD-eiR"/>
+                        <outlet property="thirdTopConstraint" destination="aED-KT-d2q" id="gLD-wL-SRp"/>
                         <segue destination="Ngh-SF-aO7" kind="show" identifier="WebViewController" id="EtO-Q3-tZU"/>
                     </connections>
                 </viewController>
