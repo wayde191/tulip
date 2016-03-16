@@ -51,8 +51,9 @@
             <connections>
                 <outlet property="iconImageView" destination="Ot7-Np-GW6" id="rv6-v9-or2"/>
                 <outlet property="textLabel" destination="yIl-UA-egC" id="TcE-Tl-IYY"/>
+                <outlet property="theButton" destination="5nA-bG-3i3" id="SUY-hH-9Xl"/>
             </connections>
-            <point key="canvasLocation" x="159" y="259"/>
+            <point key="canvasLocation" x="89" y="94"/>
         </view>
     </objects>
 </document>

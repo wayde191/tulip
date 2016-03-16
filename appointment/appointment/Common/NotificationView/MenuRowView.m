@@ -11,6 +11,18 @@
 
 @implementation MenuRowView
 
+- (void)awakeFromNib {
+    [self.theButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
+}
+
+- (void)touchDown {
+    self.textLabel.textColor = [UIColor lightGrayColor];
+}
+
+- (void)touchUp {
+    self.textLabel.textColor = [UIColor blackColor];
+}
+
 - (void)setupMenu:(NSDictionary *)data {
     self.dataDic = data;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:_dataDic[@"icon"]]];
@@ -20,6 +32,7 @@
 - (IBAction)onMenuClicked:(id)sender {
     if (self.menuClickedBlock) {
         self.menuClickedBlock(_dataDic);
+        [self touchUp];
     }
 }
 @end

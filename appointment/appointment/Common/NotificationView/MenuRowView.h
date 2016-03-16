@@ -17,6 +17,7 @@ typedef void (^menuRowClickedBlock)(NSDictionary *data);
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UIButton *theButton;
 
 - (IBAction)onMenuClicked:(id)sender;
 - (void)setupMenu:(NSDictionary *)data;
