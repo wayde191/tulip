@@ -107,32 +107,18 @@
 
 #pragma mark - Private Methods
 - (void)setupConstraint {
-    CGFloat topTitleViewHeight = 47.0f;
-    CGFloat viewHeight = 159.0f;
     
-    iHDINFO(@"%@", self.view);
+    iHDINFO(@"---%@", self.view);
     
-    if (IS_IPHONE_6) {
-        self.firstTopConstraint.constant += 10.0f;
-        self.firstTop1Constraint.constant += 18.0f;
-
-        CGFloat avaliableSpaceHeight = self.view.height - topTitleViewHeight - self.firstTop1Constraint.constant - viewHeight;
-        CGFloat avarageSpaceHeight = (avaliableSpaceHeight - 2 * viewHeight) / 2 - 9.0f;
-        iHDINFO("%f", avarageSpaceHeight);
+    if (IS_IPHONE_5) {
+        self.firstTop1Constraint.constant = 10;
+        self.secondTopConstraint.constant = 10;
+        self.thirdTopConstraint.constant = 10;
         
-        self.secondTopConstraint.constant = avarageSpaceHeight;
-        self.thirdTopConstraint.constant = avarageSpaceHeight;
+    } else if (IS_IPHONE_6) {
         
     } else if (IS_IPHONE_6_PLUS) {
-        self.firstTopConstraint.constant += 10.0f;
-        self.firstTop1Constraint.constant += 18.0f;
-        
-        CGFloat avaliableSpaceHeight = self.view.height - topTitleViewHeight - self.firstTop1Constraint.constant - viewHeight;
-        CGFloat avarageSpaceHeight = (avaliableSpaceHeight - 2 * viewHeight) / 2 - 29.0f;
-        iHDINFO("%f", avarageSpaceHeight);
-        
-        self.secondTopConstraint.constant = avarageSpaceHeight;
-        self.thirdTopConstraint.constant = avarageSpaceHeight;
+
     }
 }
 

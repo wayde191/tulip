@@ -19,7 +19,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIl-UA-egC">
-                    <rect key="frame" x="60" y="14" width="200" height="21"/>
+                    <rect key="frame" x="60" y="16" width="200" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="TfO-Kz-l0K"/>
                     </constraints>
@@ -38,7 +38,7 @@
             <constraints>
                 <constraint firstItem="5nA-bG-3i3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Arf-wd-0FJ"/>
                 <constraint firstItem="yIl-UA-egC" firstAttribute="leading" secondItem="Ot7-Np-GW6" secondAttribute="trailing" constant="8" id="Jla-e3-dTb"/>
-                <constraint firstItem="yIl-UA-egC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="RwX-Zw-B0a"/>
+                <constraint firstItem="yIl-UA-egC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="RwX-Zw-B0a"/>
                 <constraint firstAttribute="bottom" secondItem="5nA-bG-3i3" secondAttribute="bottom" id="YcE-4M-PZg"/>
                 <constraint firstAttribute="trailing" secondItem="5nA-bG-3i3" secondAttribute="trailing" id="ZBJ-he-SXA"/>
                 <constraint firstItem="Ot7-Np-GW6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="Zv4-kw-O90"/>
