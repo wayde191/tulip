@@ -18,7 +18,7 @@
 #define HOME_URL_2      @"http://tulip.sibosen.com/search/city.html"
 #define HOME_URL_3      @"http://tulip.sibosen.com/search/doctor.html"
 
-#define HOME_TEST_URL   @"http://sandbox.api.sibosen.com/test.html"
+#define HOME_TEST_URL   @"http://sandbox.api.sibosen.com/ios.html"
 
 @interface ViewController (){
     NSString *_selectedUrl;
