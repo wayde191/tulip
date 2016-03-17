@@ -277,6 +277,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     _notView = [NotificationView viewFromNib];
     _notView.width = IH_DEVICE_WIDTH;
     _notView.height = IH_DEVICE_HEIGHT;
+    _notView.top = 20.0f;
     AppDelegate __weak *weakself = self;
     _notView.menuClickedBlock = ^(NSDictionary *data){
         [weakself menuRowClicked:data];

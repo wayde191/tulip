@@ -87,11 +87,14 @@ static const CGFloat kOtherIconsSize = 30;
     titleLabel.text = title;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = titleColor;
+    titleLabel.font = FONTSIZE_15;
 
     //set the number of lines to 0 (unlimited)
     //set a maximum size to the label
     //then get the size that fits the maximum size
     titleLabel.numberOfLines = 0;
+//    titleLabel.adjustsFontSizeToFitWidth = YES;
+//    titleLabel.minimumScaleFactor = 8.0;
     CGSize requiredSize = [titleLabel sizeThatFits:CGSizeMake(width - kInsetValue, height - kInsetValue)];
     titleLabel.frame = CGRectMake(width/2 - requiredSize.width / 2, kInsetValue, requiredSize.width, requiredSize.height);
     [alertView addSubview:titleLabel];

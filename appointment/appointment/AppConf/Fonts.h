@@ -43,6 +43,8 @@
 #define HelveticaNeue_FONTSIZE_20    [UIFont fontWithName:@"HelveticaNeue" size:20.0]
 #define HelveticaNeue_FONTSIZE_21    [UIFont fontWithName:@"HelveticaNeue" size:21.0]
 
+#define FONTSIZE_15          [UIFont systemFontOfSize:15.0]
+
 #define UIColorFromRGB(rgbValue)            [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define BTN_ENABLE_BG_COLOR        UIColorFromRGB(0xAC0005)
