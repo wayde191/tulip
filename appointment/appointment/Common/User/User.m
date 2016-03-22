@@ -372,11 +372,11 @@ static User *singletonInstance = nil;
 {
     [super serviceCallSuccess:response];
     if ([response.serviceName isEqualToString:GET_MENU_SERVICE]) {
-        self.dynamicMenuArr = response.userInfoDic[@"data"];
+        self.dynamicMenuArr = response.userInfoDic[@"_data"];
         [_appDelegate setupMenu:self.dynamicMenuArr];
         
     } else if ([response.serviceName isEqualToString:GET_AD_SERVICE]) {
-        self.adDic = response.userInfoDic[@"data"];
+        self.adDic = response.userInfoDic[@"_data"];
         [_appDelegate showAds:_adDic];
     }
 }
