@@ -16,11 +16,11 @@
 #define IH_PRODUCTION       1
 
 #if IH_PRODUCTION == 1
-#define HOST_NAME           @"sandbox.api.sibosen.com"
-#define SERVICE_ROOT_URL    @"http://sandbox.api.sibosen.com/"
+#define HOST_NAME           @"www.baidu.com"
+#define SERVICE_ROOT_URL    @"http://apiv2.yjxgh.com/"
 #else
 #define HOST_NAME           @"127.0.0.1"
-#define SERVICE_ROOT_URL    @"http://127.0.0.1:8090/"
+#define SERVICE_ROOT_URL    @"http://127.0.0.1/"
 #endif
 
 /////////////////////////// Services ///////////////////////////////////////////

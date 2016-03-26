@@ -21,6 +21,8 @@
     NSString *_leftScriptStr;
     NSString *_rightUrl;
     NSString *_rightScriptStr;
+    
+    BOOL _pageChanges;
 }
 @property (nonatomic, strong) NetworkIssueView *issueView;
 
@@ -35,9 +37,11 @@
     self.title = @"就诊城市";
     [self setLeftGobackButton];
     
+//    [self loadTestHtml];
     [self loadCurrentUrl];
     self.webview.scrollView.bounces = NO;
     self.webview.scrollView.showsHorizontalScrollIndicator = NO;
+    [self setAgent];
     
     [self setupIssueView];
 }
@@ -48,15 +52,13 @@
 
 #pragma --WebViewDelegate--
 - (void)setAgent {
-    // Add for icbc bank of China
-    NSDictionary *useragentDic = [[NSDictionary alloc] initWithObjectsAndKeys:@"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0_2 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A400 Safari/6531.22.7", @"UserAgent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:useragentDic];
+    NSString* userAgent = [self.webview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSString *ua = [NSString stringWithFormat:@"%@ TULIP AGENT", userAgent];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    [self setAgent];
-    
     if ([[[request URL] scheme] isEqualToString:TULIP_PROTOCOL]) {
         NSString *url = [NSString stringWithFormat:@"%@", [request URL]];
         iHDINFO(@"%@", url);
@@ -72,14 +74,6 @@
     }
     
     self.urlString = [NSString stringWithFormat:@"%@", [request URL]];
-//
-//    // Goto load app page
-//    NSArray *urlComps = [self.urlString componentsSeparatedByString:@"://"];//根据://标记将字符串分成数组
-//    
-//    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"itms-apps"]){
-//        NSString* webStringURL = [self.urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: webStringURL]];
-//    }
     
     iHDINFO(@"urlString %@", self.urlString);
     return YES;
@@ -99,6 +93,7 @@
     
     if ([[self.webview.request.URL scheme] isEqualToString:@"https"]
         || [[self.webview.request.URL scheme] isEqualToString:@"http"]) {
+        iHDINFO(@"------restore");
         [self restoreNavigationButtons];
     }
     
@@ -132,8 +127,10 @@
     NSString *action = order[0];
     if ([action isEqualToString:@"leftActionButton"]) {
         [self setLeftButton:order];
+        
     } else if ([action isEqualToString:@"rightActionButton"]) {
         [self setRightButton:order];
+        
     } else if ([action isEqualToString:@"dataLoadingOpen"]) {
         [self hideMessage];
         [self showMessage:@"加载中..."];
@@ -319,6 +316,13 @@
 - (void)loadCurrentUrl {
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 
+}
+
+#pragma mark - Tests
+- (void)loadTestHtml {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"tests" ofType:@"html"];
+    NSString *htmlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    [self.webview loadHTMLString:htmlStr baseURL:[NSURL URLWithString:filePath]];
 }
 
 @end

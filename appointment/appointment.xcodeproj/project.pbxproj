@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA73D22A1C919DCC00AC5E9F /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA73D2291C919DCC00AC5E9F /* AdView.m */; };
 		BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA73D22B1C919DDF00AC5E9F /* AdView.xib */; };
+		BA75CEA41CA68FBD0041C11A /* tests.html in Resources */ = {isa = PBXBuildFile; fileRef = BA75CEA31CA68FBD0041C11A /* tests.html */; };
 		BA7E18EF1C943DFE00DCEEC1 /* NavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7E18EE1C943DFE00DCEEC1 /* NavButton.m */; };
 		BA7E18F11C943E2700DCEEC1 /* NavButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7E18F01C943E2700DCEEC1 /* NavButton.xib */; };
 		BA9934101C9242C700FD691D /* MenuRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA99340F1C9242C700FD691D /* MenuRowView.m */; };
@@ -121,6 +122,7 @@
 		BA73D2281C919DCC00AC5E9F /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		BA73D2291C919DCC00AC5E9F /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		BA73D22B1C919DDF00AC5E9F /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		BA75CEA31CA68FBD0041C11A /* tests.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tests.html; sourceTree = "<group>"; };
 		BA7E18ED1C943DFE00DCEEC1 /* NavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavButton.h; sourceTree = "<group>"; };
 		BA7E18EE1C943DFE00DCEEC1 /* NavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavButton.m; sourceTree = "<group>"; };
 		BA7E18F01C943E2700DCEEC1 /* NavButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavButton.xib; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				BAF51FE71C90F7AF007F9827 /* AppConfig.h */,
 				BAF51FE81C90F7AF007F9827 /* Fonts.h */,
 				BAF51FE91C90F7AF007F9827 /* Services.h */,
+				BA75CEA31CA68FBD0041C11A /* tests.html */,
 			);
 			path = AppConf;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				BA73D22C1C919DE000AC5E9F /* AdView.xib in Resources */,
 				BAF520BA1C90FC1A007F9827 /* loading0018.png in Resources */,
 				BAF520C81C90FC1B007F9827 /* warning@2x.png in Resources */,
+				BA75CEA41CA68FBD0041C11A /* tests.html in Resources */,
 				BAF520B31C90FC1A007F9827 /* loading0011.png in Resources */,
 				BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */,
 				BAF521071C90FEEA007F9827 /* sound.caf in Resources */,

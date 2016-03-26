@@ -10,13 +10,13 @@
 #import "WebViewController.h"
 #import "IHShare.h"
 
-//1 靠谱的医生－ http://tulip.sibosen.com/inquiry/step1.html
-//2 指定医院－ http://tulip.sibosen.com/search/city.html
-//3 指定医生－ http://tulip.sibosen.com/search/doctor.html
+//靠谱的医院医生都行：http://h5v2.yjxgh.com/Inquiry/step1?page=init
+//只要指定的医院：http://h5v2.yjxgh.com/Search/city?page=init
+//只要指定的医生：http://h5v2.yjxgh.com/Search/doctor?page=init
 
-#define HOME_URL_1      @"http://tulip.sibosen.com/inquiry/step1.html"
-#define HOME_URL_2      @"http://tulip.sibosen.com/search/city.html"
-#define HOME_URL_3      @"http://tulip.sibosen.com/search/doctor.html"
+#define HOME_URL_1      @"http://h5v2.yjxgh.com/Inquiry/step1?page=init"
+#define HOME_URL_2      @"http://h5v2.yjxgh.com/Search/city?page=init"
+#define HOME_URL_3      @"http://h5v2.yjxgh.com/Search/doctor?page=init"
 
 #define HOME_TEST_URL   @"http://sandbox.api.sibosen.com/ios.html"
 
