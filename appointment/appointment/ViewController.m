@@ -28,11 +28,20 @@
 
 @implementation ViewController
 
+- (void)setAgent {
+    NSString* userAgent = @"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13B137";
+        
+    NSString *ua = [NSString stringWithFormat:@"%@ TULIP AGENT", userAgent];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [appDelegate showAdView];
     
     [self setupConstraint];
+    [self setAgent];
 }
 
 - (void)didReceiveMemoryWarning {

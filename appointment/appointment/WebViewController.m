@@ -23,6 +23,7 @@
     NSString *_rightScriptStr;
     
     BOOL _pageChanges;
+    BOOL _requestCancelled;
 }
 @property (nonatomic, strong) NetworkIssueView *issueView;
 
@@ -38,10 +39,10 @@
     [self setLeftGobackButton];
     
 //    [self loadTestHtml];
+    [self setAgent];
     [self loadCurrentUrl];
     self.webview.scrollView.bounces = NO;
     self.webview.scrollView.showsHorizontalScrollIndicator = NO;
-    [self setAgent];
     
     [self setupIssueView];
 }
@@ -53,8 +54,11 @@
 #pragma --WebViewDelegate--
 - (void)setAgent {
     NSString* userAgent = [self.webview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    iHDINFO(@"---??? %@", userAgent);
+
     NSString *ua = [NSString stringWithFormat:@"%@ TULIP AGENT", userAgent];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -73,6 +77,8 @@
         [self addTrustedHost:self.urlString];
     }
     
+    [self hideIssueView];
+    _requestCancelled = NO;
     self.urlString = [NSString stringWithFormat:@"%@", [request URL]];
     
     iHDINFO(@"urlString %@", self.urlString);
@@ -89,7 +95,6 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self hideIssueView];
     [self showMessage:@"加载中..."];
     [self restoreNavByScheme];
 }
@@ -109,7 +114,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self showIssueView];
+    _requestCancelled ? [self hideIssueView] : [self showIssueView];
     
     iHDINFO(@"webview failed! Error %@ - %@ - %@", error, [error userInfo], [error localizedDescription]);
     [self hideMessage];
@@ -184,6 +189,7 @@
     if (_leftUrl) {
         [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_leftUrl]]];
     } else {
+        _requestCancelled = YES;
         [self.webview stringByEvaluatingJavaScriptFromString:_leftScriptStr];
     }
 }
