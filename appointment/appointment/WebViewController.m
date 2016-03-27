@@ -79,9 +79,19 @@
     return YES;
 }
 
+- (void)restoreNavByScheme {
+    if ([[self.webview.request.URL scheme] isEqualToString:@"https"]
+        || [[self.webview.request.URL scheme] isEqualToString:@"http"]) {
+        iHDINFO(@"------restore");
+        [self restoreNavigationButtons];
+    }
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    [self hideIssueView];
     [self showMessage:@"加载中..."];
+    [self restoreNavByScheme];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
@@ -90,12 +100,6 @@
     self.urlString = [self.webview.request.URL absoluteString];
     
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    
-    if ([[self.webview.request.URL scheme] isEqualToString:@"https"]
-        || [[self.webview.request.URL scheme] isEqualToString:@"http"]) {
-        iHDINFO(@"------restore");
-        [self restoreNavigationButtons];
-    }
     
     // Disable user selection
     [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
@@ -237,11 +241,17 @@
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    NSString *screenScript = @"window.cb.screenshot";
+    
     if (error == nil) {
         [self showDoneMessage:@"截图保存成功"];
+        screenScript = [NSString stringWithFormat:@"%@('succ')", screenScript];
     }else{
         [self showErrorMessage:@"截图保存失败"];
+        screenScript = [NSString stringWithFormat:@"%@('fail')", screenScript];
     }
+    
+    [self.webview stringByEvaluatingJavaScriptFromString:screenScript];
 }
 
 - (UIImage *)getScreenshotImage {
