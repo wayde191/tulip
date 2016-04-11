@@ -10,6 +10,8 @@
 #import "IHShare.h"
 #import "NavButton.h"
 #import "NetworkIssueView.h"
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 #define SEPARATED_SIGNAL @"00110011"
 #define TULIP_PROTOCOL   @"tulip"
@@ -142,7 +144,12 @@
         
     } else if ([action isEqualToString:@"dataLoadingOpen"]) {
         [self hideMessage];
-        [self showMessage:@"加载中..."];
+        if (order.count > 1) {
+            [self showMessage:[self getReadableString:order[1]]];
+        } else {
+            [self showMessage:@"数据加载中..."];
+        }
+        
         
     } else if ([action isEqualToString:@"dataLoadingClose"]) {
         [self hideMessage];
@@ -168,6 +175,11 @@
         
     } else if ([action isEqualToString:@"backToHome"]) {
         [self setLeftGobackButton];
+        
+    } else if ([action isEqualToString:@"addCalendar"]) {
+        [self addCalendarEvent:order];
+    } else if([action isEqualToString:@"removeCalendar"]) {
+        [self removeCalendarEvent:order];
     }
 }
 
@@ -308,6 +320,68 @@
     self.navigationItem.rightBarButtonItem = nil;
 }
 
+// addCalendar00110011title00110011location0011001122-05-2016 16:590011001122-05-2016 18:5900110011eventID
+- (void)addCalendarEvent:(NSArray *)order {
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    if ([eventStore respondsToSelector:@selector(requestAccessToEntityType:completion:)]) {
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    iHDINFO(@"Calendar Errors!");
+                    
+                } else if (!granted) {
+                    iHDINFO(@"Permission Denied!");
+                    
+                } else {
+                    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+                    event.title     = order[1];
+                    event.location  = order[2];
+                    
+                    NSDateFormatter *tempFormatter = [[NSDateFormatter alloc]init];
+                    [tempFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+                    
+                    event.startDate = [tempFormatter dateFromString:order[3]];
+                    event.endDate   = [tempFormatter dateFromString:order[4]];
+                    event.allDay    = YES;
+                    
+                    [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f * -10.0f]];
+                    
+                    [event setCalendar:[eventStore defaultCalendarForNewEvents]];
+                    iHDINFO(@"%@", event);
+                    
+                    NSError *err;
+                    [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
+                    
+                    iHDINFO(@"%@", err);
+                    
+                    NSString *eventIdentifierStr = [[NSString alloc] initWithFormat:@"%@", event.eventIdentifier];
+                    
+                    NSString *calendarScript = [NSString stringWithFormat:@"window.cb.addCalendariOSEventId('%@', '%@')",
+                                                order[5],
+                                                eventIdentifierStr];
+                    iHDINFO(@"%@", calendarScript);
+                    [self.webview stringByEvaluatingJavaScriptFromString:calendarScript];
+                    
+                    iHDINFO(@"Add calendar event succeed!");
+                }
+            });
+        }];
+    }
+}
+
+// removeCalendar00110011eventId
+- (void)removeCalendarEvent:(NSArray *)order {
+    EKEventStore* store = [[EKEventStore alloc] init];
+    EKEvent* eventToRemove = [store eventWithIdentifier:order[1]];
+    if (eventToRemove != nil) {
+        NSError* error = nil;
+        [store removeEvent:eventToRemove span:EKSpanThisEvent error:&error];
+        
+        iHDINFO(@"Remove calendar event succeed!");
+    }
+}
+
 #pragma mark - Private View
 - (void)setupIssueView {
     self.issueView = [NetworkIssueView viewFromNib];
@@ -336,9 +410,15 @@
 
 #pragma mark - Tests
 - (void)loadTestHtml {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"tests" ofType:@"html"];
-    NSString *htmlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    [self.webview loadHTMLString:htmlStr baseURL:[NSURL URLWithString:filePath]];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"tests" ofType:@"html"];
+//    NSString *htmlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+//    [self.webview loadHTMLString:htmlStr baseURL:[NSURL URLWithString:filePath]];
+    
+    NSString *url = @"tulip:addCalendar00110011title00110011location0011001122-05-2016 16:590011001122-05-2016 18:5900110011eventID";
+    NSString *infoStr = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:", TULIP_PROTOCOL] withString:@""];
+    NSArray *infoArr = [infoStr componentsSeparatedByString:SEPARATED_SIGNAL];
+    iHDINFO(@"%@", infoArr);
+    [self dispatch:infoArr];
 }
 
 @end

@@ -155,10 +155,20 @@ static User *singletonInstance = nil;
 }
 
 - (NSString *)getUUID {
-    CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-    CFRelease(theUUID);
-    return (__bridge NSString *)string;
+    NSString *uuid = [USER_DEFAULT objectForKey:IH_DEVICE_UUID];
+    if (uuid) {
+        return uuid;
+    } else {
+        CFUUIDRef theUUID = CFUUIDCreate(NULL);
+        CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+        CFRelease(theUUID);
+        
+        uuid = (__bridge NSString *)string;
+        [USER_DEFAULT setObject:uuid forKey:IH_DEVICE_UUID];
+        [USER_DEFAULT synchronize];
+        
+        return uuid;
+    }
 }
 
 - (void)doUploadToken {

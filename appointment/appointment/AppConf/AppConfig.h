@@ -51,6 +51,7 @@ typedef enum {
 #define YD_BUTTON_TYPE                      @"YDButton"
 
 #define IH_DEVICE_TOKEN                     @"iHDeviceTokenDota"
+#define IH_DEVICE_UUID                      @"iHDeviceUUID"
 #define MK_FIRST_TIME_OPEN                  @"MKFirstTimeOpen"
 
 #define LP_USERNAME                         @"LocatePeopleUsername"
