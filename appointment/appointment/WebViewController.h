@@ -8,7 +8,7 @@
 
 #import "BBQBaseViewController.h"
 
-@interface WebViewController : BBQBaseViewController <ISSShareViewDelegate, UIScrollViewDelegate, UIWebViewDelegate> {
+@interface WebViewController : BBQBaseViewController <ISSShareViewDelegate, UIScrollViewDelegate, UIWebViewDelegate, UIGestureRecognizerDelegate> {
     NSMutableArray *_trustedHosts;
 }
 

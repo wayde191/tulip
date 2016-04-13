@@ -43,8 +43,7 @@
 //    [self loadTestHtml];
     [self setAgent];
     [self loadCurrentUrl];
-    self.webview.scrollView.bounces = NO;
-    self.webview.scrollView.showsHorizontalScrollIndicator = NO;
+    [self setupWebview];
     
     [self setupIssueView];
 }
@@ -57,10 +56,12 @@
 - (void)setAgent {
     NSString* userAgent = [self.webview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     iHDINFO(@"---??? %@", userAgent);
-
-    NSString *ua = [NSString stringWithFormat:@"%@ TULIP AGENT", userAgent];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (![userAgent containsString:@"TULIP AGENT"]) {
+        NSString *ua = [NSString stringWithFormat:@"%@ TULIP AGENT", userAgent];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -111,7 +112,13 @@
     // Disable user selection
     [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
     // Disable callout
-//    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+    
+    NSString *js = @"var metaTag=document.createElement('meta');"
+    "metaTag.name = \"viewport\";"
+    "metaTag.content = \"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\";"
+    "document.getElementsByTagName('head')[0].appendChild(metaTag);";
+    [_webview stringByEvaluatingJavaScriptFromString:js];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -406,6 +413,67 @@
 - (void)loadCurrentUrl {
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
 
+}
+
+- (void)fakeTapGestureHandler:(id)sender{
+    
+}
+
+- (void)setupWebview {
+    self.webview.opaque = NO;
+    self.webview.backgroundColor = [UIColor clearColor];
+    self.webview.scrollView.bounces = NO;
+    self.webview.scrollView.showsHorizontalScrollIndicator = NO;
+    self.webview.scalesPageToFit = NO;
+    self.webview.multipleTouchEnabled = NO;
+    
+    iHDINFO(@"-- %f -- %f", self.webview.scrollView.contentOffset.x, self.webview.scrollView.contentOffset.y);
+    [self goThroughSubViewFrom:self.webview];
+    
+}
+
+- (void)addGesture {
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fakeTapGestureHandler:)];
+
+    [tapGestureRecognizer setDelegate:self];
+    [self.webview.scrollView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)goThroughSubViewFrom:(UIView *)view {
+    for (UIView *v in [view subviews])
+    {
+        if (v != view)
+        {
+            [self goThroughSubViewFrom:v];
+        }
+    }
+    for (UIGestureRecognizer *reco in [view gestureRecognizers])
+    {
+        if ([reco isKindOfClass:[UITapGestureRecognizer class]])
+        {
+            if ([(UITapGestureRecognizer *)reco numberOfTapsRequired] == 2)
+            {
+                [view removeGestureRecognizer:reco];
+            }
+        }
+    }
+}
+
+- (void)scrollBack {
+    _webview.scrollView.contentOffset = CGPointMake(self.webview.scrollView.contentOffset.x, 0);
+    _webview.scrollView.scrollEnabled = YES;
+}
+
+#pragma mark - Gesture Delegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.tapCount == 2) {
+        _webview.scrollView.scrollEnabled = NO;
+        if (_webview.scrollView.contentOffset.y == -64) {
+            [self performSelector:@selector(scrollBack) withObject:nil afterDelay:.3];
+        }
+
+    }
+    return YES;
 }
 
 #pragma mark - Tests
