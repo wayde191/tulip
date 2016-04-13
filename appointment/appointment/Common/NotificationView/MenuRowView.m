@@ -17,10 +17,12 @@
 
 - (void)touchDown {
     self.textLabel.textColor = [UIColor lightGrayColor];
+    self.backgroundColor = MENU_HOVER_BG_COLOR;
 }
 
 - (void)touchUp {
     self.textLabel.textColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setupMenu:(NSDictionary *)data {
