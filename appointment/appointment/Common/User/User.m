@@ -46,6 +46,9 @@ static User *singletonInstance = nil;
     NSString *_userEmail;
     NSString *_userName;
     
+    NSString *_latitudeStr;
+    NSString *_longitudeStr;
+    
     
     void(^ _getAllFundsWhenDone)(void) ;
 }
@@ -102,19 +105,22 @@ static User *singletonInstance = nil;
 }
 
 - (NSString *)getLongitudeStr {
-    return [NSString stringWithFormat:@"%f", self.myLocation.coordinate.longitude];
+    return _longitudeStr;
 }
 
 - (NSString *)getLatitudeStr {
-    return [NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude];
+    return _latitudeStr;
 }
 
 - (void)uploadLocation {
-    theRequest.requestMethod = iHRequestMethodPost;
-    NSDictionary *paras = @{@"latitude":[NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude],
-                            @"longitude": [NSString stringWithFormat:@"%f", self.myLocation.coordinate.longitude]};
+    _latitudeStr = [NSString stringWithFormat:@"%f", self.myLocation.coordinate.latitude];
+    _longitudeStr = [NSString stringWithFormat:@"%f", self.myLocation.coordinate.longitude];
     
-    [self doCallService:UPLOAD_LOCATION_SERVICE withParameters:paras andServiceUrl:SERVICE_UPLOAD_LOCATION forDelegate:nil];
+    [USER_DEFAULT setObject:_latitudeStr forKey:LOCATION_LATITUDE];
+    [USER_DEFAULT setObject:_longitudeStr forKey:LOCATION_LONGITUDE];
+    [USER_DEFAULT synchronize];
+    
+    return;
 }
 
 - (NSString *)getAddress {
@@ -192,17 +198,12 @@ static User *singletonInstance = nil;
 
 - (void)loginSuccess:(NSDictionary *)uinfo
 {
-//    _userEmail = [uinfo objectForKey:@"email"];
-//    _userName = [uinfo objectForKey:@"name"];
-//    _userId = [uinfo objectForKey:@"id"];
-//    _groupId = [uinfo objectForKey:@"group_id"];
-//    
-//    [_cachedData setObject:_userEmail forKey:IF_USER_EMAIL];
-//    [_cachedData setObject:_userName forKey:IF_USER_NAME];
-//    [_cachedData setObject:_userId forKey:IF_USER_ID];
-//    [_cachedData setObject:_groupId forKey:IF_GROUP_ID];
-//    
-//    [self syncCachedData];
+    if ([USER_DEFAULT objectForKey:LOCATION_LONGITUDE]) {
+        _longitudeStr = [USER_DEFAULT objectForKey:LOCATION_LONGITUDE];
+    }
+    if ([USER_DEFAULT objectForKey:LOCATION_LATITUDE]) {
+        _latitudeStr = [USER_DEFAULT objectForKey:LOCATION_LATITUDE];
+    }
     
     [APService setAlias:[self getUUID]
        callbackSelector:@selector(tagsAliasCallback:tags:alias:)

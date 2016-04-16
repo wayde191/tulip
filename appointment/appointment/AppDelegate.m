@@ -352,6 +352,10 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 }
 
 - (void)locateMe {
+    if ([USER_DEFAULT objectForKey:LOCATION_LATITUDE] && [USER_DEFAULT objectForKey:LOCATION_LONGITUDE]) {
+        return;
+    }
+    
     _locateManager = [[CLLocationManager alloc] init];
     _locateManager.delegate  = self;
     _locateManager.desiredAccuracy = kCLLocationAccuracyKilometer;
@@ -369,7 +373,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
 - (void)stopUpdatingLocation:(NSString *)state {
     [_locateManager stopUpdatingLocation];
     _locateManager.delegate = nil;
-//    [[User sharedInstance] uploadLocation];
+    [[User sharedInstance] uploadLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate

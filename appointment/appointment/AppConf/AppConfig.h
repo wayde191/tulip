@@ -25,6 +25,10 @@ typedef enum {
 
 
 /////////////////////////// Global Keys /////////////////////////////////////
+
+#define LOCATION_LONGITUDE               @"BBQLocationLongitude"
+#define LOCATION_LATITUDE                @"BBQLocationLatitude"
+
 #define USER_DEFAULT_GOODS_KEY           @"BBQUserDefaultHerosKey"
 #define USER_DEFAULT_GOODS_DATE          @"BBQUserDefaultHerosDate"
 
@@ -42,23 +46,12 @@ typedef enum {
 #define OLD_IPHONE_SCROLL_INIT_TOP          -64.0
 #define TAG_SPACE_WIDTH                     14
 
-#define FAQ_DEFAULT_URL                     @"http://www.wkzuche.com:8080/zuche/download/FAQ.html"
-#define REGISTER_TERM_DEFAULT_URL           @"http://www.wkzuche.com:8080/zuche/download/RegisterTerm.html"
-#define SERVICE_TERM_DEFAULT_URL            @"http://www.wkzuche.com:8080/zuche/download/ServiceTerm.html"
-#define PAY_TERM_DEFAULT_URL                @"http://www.wkzuche.com:8080/zuche/download/PayTerm.html"
-
 #define YD_TEXTFIELD_TYPE                   @"YDTextField"
 #define YD_BUTTON_TYPE                      @"YDButton"
 
 #define IH_DEVICE_TOKEN                     @"iHDeviceTokenDota"
 #define IH_DEVICE_UUID                      @"iHDeviceUUID"
 #define MK_FIRST_TIME_OPEN                  @"MKFirstTimeOpen"
-
-#define LP_USERNAME                         @"LocatePeopleUsername"
-#define LP_PASSWORD                         @"LocatePeoplePassword"
-#define LP_REMEMBER                         @"LocatePeopleRemember"
-#define LP_AUTO_LOGIN                       @"LocatePeopleAutoLogin"
-#define MK_USER_AUTOLOGIN_INFO              @"MKUserAutologinInfo"
 
 
 ////////////////////////////////////////////////////////////

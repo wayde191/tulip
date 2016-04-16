@@ -41,6 +41,8 @@
     [self setLeftGobackButton];
     
 //    [self loadTestHtml];
+//    return;
+    
     [self setAgent];
     [self loadCurrentUrl];
     [self setupWebview];
@@ -342,14 +344,14 @@
                     
                 } else {
                     EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-                    event.title     = order[1];
-                    event.location  = order[2];
+                    event.title     = [self getReadableString: order[1]];
+                    event.location  = [self getReadableString: order[2]];
                     
                     NSDateFormatter *tempFormatter = [[NSDateFormatter alloc]init];
                     [tempFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
                     
-                    event.startDate = [tempFormatter dateFromString:order[3]];
-                    event.endDate   = [tempFormatter dateFromString:order[4]];
+                    event.startDate = [tempFormatter dateFromString:[self getReadableString: order[3]]];
+                    event.endDate   = [tempFormatter dateFromString:[self getReadableString: order[4]]];
                     event.allDay    = YES;
                     
                     [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f * -10.0f]];
@@ -482,7 +484,8 @@
 //    NSString *htmlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
 //    [self.webview loadHTMLString:htmlStr baseURL:[NSURL URLWithString:filePath]];
     
-    NSString *url = @"tulip:addCalendar00110011title00110011location0011001122-05-2016 16:590011001122-05-2016 18:5900110011eventID";
+//  NSString *url = @"tulip:addCalendar00110011title00110011location0011001122-05-2016 16:590011001122-05-2016 18:5900110011eventID";
+    NSString *url = @"tulip:addCalendar00110011就诊00110011北京市大兴区精神病医院0011001127-04-2016 13:000011001127-04-2016 17:000011001155441808";
     NSString *infoStr = [url stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@:", TULIP_PROTOCOL] withString:@""];
     NSArray *infoArr = [infoStr componentsSeparatedByString:SEPARATED_SIGNAL];
     iHDINFO(@"%@", infoArr);
