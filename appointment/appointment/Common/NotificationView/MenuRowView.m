@@ -13,15 +13,17 @@
 
 - (void)awakeFromNib {
     [self.theButton addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
+    [self.theButton addTarget:self action:@selector(touchUp) forControlEvents:UIControlEventTouchDragOutside];
+    [self.theButton addTarget:self action:@selector(touchUp) forControlEvents:UIControlEventTouchUpOutside];
 }
 
 - (void)touchDown {
-    self.textLabel.textColor = [UIColor lightGrayColor];
+//    self.textLabel.textColor = [UIColor lightGrayColor];
     self.backgroundColor = MENU_HOVER_BG_COLOR;
 }
 
 - (void)touchUp {
-    self.textLabel.textColor = [UIColor blackColor];
+//    self.textLabel.textColor = [UIColor blackColor];
     self.backgroundColor = [UIColor clearColor];
 }
 

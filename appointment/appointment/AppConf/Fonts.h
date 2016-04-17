@@ -17,7 +17,7 @@
 
 #define NAV_BAR_BG_NORMAL_COLOR         UIColorFromRGB(0xF3F6F6)
 #define NAV_BAR_TITLE_NORMAL_COLOR      UIColorFromRGB(0x2E3642)
-#define MENU_HOVER_BG_COLOR             UIColorFromRGB(0xEEEEEE)
+#define MENU_HOVER_BG_COLOR             UIColorFromRGB(0xD4E1E1)
 
 #define ADD_LEVEL_COLOR         RGBACOLOR(190, 1, 0, 1)
 #define HERO_EQUI_COLOR         RGBACOLOR(77, 134, 198, 1)
