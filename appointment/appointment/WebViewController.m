@@ -33,6 +33,16 @@
 
 @implementation WebViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"WebViewPage"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"WebViewPage"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _trustedHosts = [[NSMutableArray alloc] init];

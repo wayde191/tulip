@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "KeyboardView.h"
 #import "NetworkIssueView.h"
+#import "MobClick.h"
 
 @interface BBQBaseViewController : iHBaseViewController <UIActionSheetDelegate> {
     AppDelegate *appDelegate;

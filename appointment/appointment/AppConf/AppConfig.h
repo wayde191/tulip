@@ -26,6 +26,8 @@ typedef enum {
 
 /////////////////////////// Global Keys /////////////////////////////////////
 
+#define UMENG_APPKEY                @"5621e9e367e58ebfc5005387"
+
 #define LOCATION_LONGITUDE               @"BBQLocationLongitude"
 #define LOCATION_LATITUDE                @"BBQLocationLatitude"
 

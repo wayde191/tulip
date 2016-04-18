@@ -16,6 +16,7 @@
 		BA9934121C9242DA00FD691D /* MenuRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9934111C9242DA00FD691D /* MenuRowView.xib */; };
 		BA9934151C92D3E100FD691D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9934141C92D3E100FD691D /* WebViewController.m */; };
 		BAA9F6331C93C880006F0B0A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA9F6321C93C880006F0B0A /* CoreLocation.framework */; };
+		BADBC5D91CC507040069D09D /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BADBC5D61CC507040069D09D /* libMobClickLibrary.a */; };
 		BAF51FB61C905C6E007F9827 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB51C905C6E007F9827 /* main.m */; };
 		BAF51FB91C905C6E007F9827 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FB81C905C6E007F9827 /* AppDelegate.m */; };
 		BAF51FBC1C905C6F007F9827 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF51FBB1C905C6F007F9827 /* ViewController.m */; };
@@ -132,6 +133,9 @@
 		BA9934131C92D3E100FD691D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		BA9934141C92D3E100FD691D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BAA9F6321C93C880006F0B0A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BADBC5D61CC507040069D09D /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		BADBC5D71CC507040069D09D /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		BADBC5D81CC507040069D09D /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		BAF51FB11C905C6E007F9827 /* appointment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appointment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF51FB51C905C6E007F9827 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BAF51FB71C905C6E007F9827 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 				BAF521551C90FFB7007F9827 /* TencentOpenAPI.framework in Frameworks */,
 				BAF520551C90F91A007F9827 /* CoreTelephony.framework in Frameworks */,
 				BAF5215C1C90FFB7007F9827 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
+				BADBC5D91CC507040069D09D /* libMobClickLibrary.a in Frameworks */,
 				BAF5214D1C90FFB7007F9827 /* QZoneConnection.framework in Frameworks */,
 				BAF520531C90F912007F9827 /* CoreGraphics.framework in Frameworks */,
 				BAF520511C90F90A007F9827 /* Foundation.framework in Frameworks */,
@@ -376,6 +381,16 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		BADBC5D51CC507040069D09D /* UM */ = {
+			isa = PBXGroup;
+			children = (
+				BADBC5D61CC507040069D09D /* libMobClickLibrary.a */,
+				BADBC5D71CC507040069D09D /* MobClick.h */,
+				BADBC5D81CC507040069D09D /* MobClickSocialAnalytics.h */,
+			);
+			path = UM;
+			sourceTree = "<group>";
+		};
 		BAF51FA81C905C6E007F9827 = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +452,7 @@
 		BAF51FEA1C90F7AF007F9827 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BADBC5D51CC507040069D09D /* UM */,
 				BA7E18EC1C943DBC00DCEEC1 /* Buttons */,
 				BA73D2271C919DA700AC5E9F /* AdView */,
 				BAF5211D1C90FFB6007F9827 /* Share */,
@@ -993,6 +1009,7 @@
 					"$(PROJECT_DIR)/appointment/Common/JPush",
 					"$(PROJECT_DIR)/appointment/Common/Share/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/appointment/Common/Share/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/appointment/Common/UM",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tulip.appointment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1025,6 +1042,7 @@
 					"$(PROJECT_DIR)/appointment/Common/JPush",
 					"$(PROJECT_DIR)/appointment/Common/Share/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/appointment/Common/Share/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/appointment/Common/UM",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tulip.appointment;
 				PRODUCT_NAME = "$(TARGET_NAME)";

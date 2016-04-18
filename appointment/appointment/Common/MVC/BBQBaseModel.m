@@ -111,7 +111,7 @@
 
 - (BOOL)doCallHttpService:(NSString *)serviceName withParameters:(NSDictionary *)paraDic andServiceUrl:(NSString *)serviceUrl forDelegate:(id)theDelegate {
     if ([super doCallHttpService:serviceName withParameters:paraDic andServiceUrl:serviceUrl forDelegate:theDelegate]) {
-        [self showMessage:LOCALIZED_DEFAULT_SYSTEM_TABLE(@"RequestSending")];
+        iHDINFO(@"RequestSending");
     } else {
         [self showMessage:@"网络异常，请检查网络设置。"];
         [self performSelector:@selector(hideMessage) withObject:nil afterDelay:1.3];

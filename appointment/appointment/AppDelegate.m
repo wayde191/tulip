@@ -14,6 +14,7 @@
 #import "NotificationView.h"
 #import "AdView.h"
 #import "ViewController.h"
+#import "MobClick.h"
 
 @interface AppDelegate (){
     NotificationView *_notView;
@@ -24,7 +25,12 @@
 @end
 
 @implementation AppDelegate
-
+- (void)umengTrack {
+//    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+//    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) REALTIME channelId:nil];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Engine Start
@@ -44,6 +50,9 @@
                                                    UIUserNotificationTypeAlert)
                                        categories:nil];
     [APService setupWithOption:launchOptions];
+    
+    // umeng
+    [self umengTrack];
     
     [self locateMe];
     return YES;

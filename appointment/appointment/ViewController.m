@@ -51,12 +51,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"HomeViewPage"];
     [self.navigationController setNavigationBarHidden:TRUE animated:FALSE];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"HomeViewPage"];
     [self.navigationController setNavigationBarHidden:FALSE animated:TRUE];
 }
 
