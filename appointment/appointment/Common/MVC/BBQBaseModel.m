@@ -113,7 +113,7 @@
     if ([super doCallHttpService:serviceName withParameters:paraDic andServiceUrl:serviceUrl forDelegate:theDelegate]) {
         [self showMessage:LOCALIZED_DEFAULT_SYSTEM_TABLE(@"RequestSending")];
     } else {
-        [self showMessage:LOCALIZED_DEFAULT_SYSTEM_TABLE(@"CheckNetWork")];
+        [self showMessage:@"网络异常，请检查网络设置。"];
         [self performSelector:@selector(hideMessage) withObject:nil afterDelay:1.3];
     }
     
@@ -121,8 +121,8 @@
 }
 
 - (void)showMessage:(NSString *)msg {
-//    AppDelegate *appDelegate = [AppDelegate getSharedAppDelegate];
-//    [appDelegate showMsg:msg];
+    AppDelegate *appDelegate = [AppDelegate getSharedAppDelegate];
+    [appDelegate showAlertMessage:msg];
 }
 
 - (void)hideMessage {

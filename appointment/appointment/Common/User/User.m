@@ -345,7 +345,6 @@ static User *singletonInstance = nil;
 - (void)doCallGetAdService {
     theRequest.requestMethod = iHRequestMethodGet;
     [self doCallHttpService:GET_AD_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_WELCOME_AD forDelegate:self];
-//    [self doCallHttpService:GET_AD_SERVICE withParameters:nil andServiceUrl:SERVICE_GET_WELCOME_NO_AD forDelegate:self];
 }
 
 - (void)initCachedData

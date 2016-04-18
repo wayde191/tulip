@@ -20,6 +20,7 @@
 
 - (void)hideTodoView;
 - (void)showMsg:(NSString *)message;
+- (void)showAlertMessage:(NSString *)msg;
 
 - (void)setupMenu:(NSArray *)menuArr;
 - (void)showMenu;

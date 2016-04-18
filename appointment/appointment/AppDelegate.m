@@ -266,6 +266,19 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     [_notView hideMenu];
 }
 
+- (void)showAlertMessage:(NSString *)msg {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:msg selectedBlock:^(NSInteger index) {
+        
+        BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+        if (canOpenSettings) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        
+    } cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
+}
+
 #pragma mark - Notification View
 - (void)menuRowClicked:(NSDictionary *)data {
     ViewController *rootViewController = [self getRootViewController];
