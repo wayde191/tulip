@@ -8,7 +8,7 @@
 
 #import "BBQBaseView.h"
 
-@interface NotificationView : BBQBaseView
+@interface NotificationView : BBQBaseView <UIGestureRecognizerDelegate>
 
 typedef void (^menuClickedBlock)(NSDictionary *data);
 @property (copy, nonatomic) menuClickedBlock menuClickedBlock;

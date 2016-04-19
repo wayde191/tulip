@@ -21,4 +21,5 @@ typedef void (^menuRowClickedBlock)(NSDictionary *data);
 
 - (IBAction)onMenuClicked:(id)sender;
 - (void)setupMenu:(NSDictionary *)data;
+- (void)clearBg;
 @end

@@ -17,6 +17,10 @@
     [self.theButton addTarget:self action:@selector(touchUp) forControlEvents:UIControlEventTouchUpOutside];
 }
 
+- (void)clearBg {
+    [self touchUp];
+}
+
 - (void)touchDown {
 //    self.textLabel.textColor = [UIColor lightGrayColor];
     self.backgroundColor = MENU_HOVER_BG_COLOR;

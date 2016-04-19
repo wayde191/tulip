@@ -12,6 +12,7 @@
 #import "MenuRowView.h"
 
 @interface NotificationView () {
+    BOOL _cleared;
 }
 
 @end
@@ -38,7 +39,63 @@
     }
 }
 
+- (void)clearMenuStatus {
+    NSArray *menuRows = [_menuContainer subviews];
+    for (MenuRowView *row in menuRows) {
+        [row clearBg];
+    }
+    _cleared = YES;
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint translation = [recognizer translationInView:self];
+    
+    if (self.menuMainView.left + translation.x > 0) {
+        self.menuMainView.left = 0;
+    } else if (self.menuMainView.left + translation.x < (-1 * self.menuMainView.width)){
+        self.menuMainView.left = -1 * self.menuMainView.width;
+    } else {
+        self.menuMainView.left = self.menuMainView.left + translation.x;
+    }
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+    if (!_cleared) {
+        [self clearMenuStatus];
+    }
+    [self clearMenuStatus];
+
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        if (self.menuMainView.left < (-1 * self.menuMainView.width / 2)) {
+            [self hideMenu];
+        } else {
+            self.left = 0;
+            self.blackView.left = 0;
+            self.blackView.alpha = 0.7;
+            [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+                self.menuMainView.left = 0;
+            } completion:^(BOOL finished) {
+            }];
+        }
+        _cleared = NO;
+    }
+}
+
+- (void)setupGesture {
+    //移动的手势
+    UIPanGestureRecognizer *panRcognize=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    panRcognize.delegate=self;
+    [panRcognize setEnabled:YES];
+    [panRcognize delaysTouchesEnded];
+    [panRcognize cancelsTouchesInView];
+    
+    [self.menuMainView addGestureRecognizer:panRcognize];
+}
+
 - (void)setupMenu:(NSArray *)data {
+    _cleared = NO;
+    [self setupGesture];
+    
     self.menuDataArr = data;
     [_menuContainer removeAllSubviews];
     

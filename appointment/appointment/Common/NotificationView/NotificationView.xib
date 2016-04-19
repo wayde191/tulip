@@ -44,9 +44,6 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUZ-DD-myb">
                                     <rect key="frame" x="0.0" y="0.0" width="288" height="128"/>
-                                    <connections>
-                                        <action selector="onBackgroundClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="OcQ-fA-Zbe"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.9882352941176471" green="0.29803921568627451" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
